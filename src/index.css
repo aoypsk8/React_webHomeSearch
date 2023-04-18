@@ -1,13 +1,27 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+
+@layer components{
+    .text-style{
+        @apply text-xl items-center hover:text-textColor hover:cursor-pointer font-semibold
+    }
+    .button-style{
+        @apply w-32 h-10 flex items-center justify-around bg-buttonColor rounded-lg
+        hover:outline hover:outline-buttonColor hover:bg-opacity-5 hover:cursor-pointer
+    }
+    .menu-button{
+        @apply hover:text-buttonColor  w-32 h-10  flex items-center justify-evenly
+    }
+    .grid-button{
+        @apply bg-white w-24 h-20 flex flex-col justify-center items-center rounded-xl my-4 hover:bg-buttonColor hover:text-white
+    }
+    .text-title-contact{
+        @apply text-white font-bold text-lg
+    }
+    .text-sub-contact{
+        @apply text-white  text-sm mt-1
+    }
+    
 }
