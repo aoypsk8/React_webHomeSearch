@@ -1,7 +1,7 @@
 // rafce
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { registerUser } from "../../api/authAction";
+import { registerUser } from "../../api/auth/authAction";
 import { useDispatch } from "react-redux";
 
 const Register = () => {

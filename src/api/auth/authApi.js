@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BASE_URL } from "../components/config/globalKey";
+import { BASE_URL } from "../../components/config/globalKey";
 import Swal from "sweetalert2";
 
 //BASE_URL + "/user/login"

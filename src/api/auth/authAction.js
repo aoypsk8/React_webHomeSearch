@@ -1,6 +1,6 @@
 // import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
-import { login } from "../slice/userSlice";
+import { login } from "../../slice/userSlice";
 import { doLogin, doRegister } from "./authApi";
 
 export const loginUser =

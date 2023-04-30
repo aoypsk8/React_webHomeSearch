@@ -5,17 +5,19 @@ import { Link } from "react-router-dom";
 
 import logo from "../assets/logo.png";
 import { logout } from "../slice/userSlice";
+import { WindowRefresh } from "./functions/functionReload";
 export default function Navbar() {
-
   const dispatch = useDispatch();
-  const tokenLoca = localStorage.token
+  const tokenLoca = localStorage.token;
   //const tokenLoca = localStorage.getItem('token')
-  console.log(tokenLoca);
-  const handleLogout =()=>{
+  // console.log(tokenLoca);
+
+  const handleLogout = () => {
     dispatch(logout());
-  }
+    WindowRefresh();
+  };
   return (
-    <div className="flex items-center pl-7 pt-5 pb-[26px] justify-between">
+    <div className="flex items-center pl-7 pt-5 pb-[26px] justify-between bg-background font-Noto">
       {/* logo and menu */}
       <div className="flex items-center">
         {/* logo */}
@@ -41,7 +43,11 @@ export default function Navbar() {
       {/* buttons */}
       {tokenLoca && (
         <div className="flex items-center mr-12 text-text-white">
-          <Link to={"/login"} className="button-style mx-6" onClick={handleLogout}>
+          <Link
+            to={"/login"}
+            className="button-style mx-6"
+            onClick={handleLogout}
+          >
             <div className="menu-button flex">
               <BsPersonCircle className="text-xl" />
               <p className="text-lg">ອອກຈາກລະບົບ</p>

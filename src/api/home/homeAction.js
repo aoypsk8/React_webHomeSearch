@@ -4,11 +4,12 @@ import { doGetAllHome } from "../home/home_api";
 export const getAllHome = () => async (dispatch) => {
   try {
     const allhome = await doGetAllHome();
-    console.log(allhome);
+    // console.log(allhome);
     dispatch(addHome(allhome));
-    return true
+    return true;
   } catch (error) {
     console.log(error);
-    return false
+    return false;
   }
 };
+

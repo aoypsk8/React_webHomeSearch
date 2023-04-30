@@ -14,7 +14,8 @@ module.exports = {
       "white":"#fff",
       "gray":"#B6B6B6",
       "background":" #F5F5F5",
-      "borderInput":"#F3F3F3"
+      "borderInput":"#F3F3F3",
+      "back":"#000"
     },
     fontFamily:{
       Noto:['Noto Sans Lao']

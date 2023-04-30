@@ -7,6 +7,8 @@ import HomePage from "./components/HomePage";
 import { useEffect } from "react";
 import { getToken } from "firebase/messaging";
 import { messaging } from "./components/config/firebase";
+import HomeDetail from "./components/details/homeDetail";
+import Search from "./components/pages/search";
 // import UserRoute from "./components/routes/UserRoute";
 function App() {
   async function requestPermission() {
@@ -17,8 +19,6 @@ function App() {
         vapidKey:
           "BLcvKXPyAGnI_Ok5ve105b_kxh66bcvuLEh84DtDHyT1b0-A56P6PI8vd7by_C3bD7EZfrQj_1N9PXOW7SPh0nk",
       });
-      // console.log("Token Gen", token);
-      // Send this token  to server ( db)
       localStorage.setItem("driverToken", token);
     } else if (permission === "denied") {
       alert("You denied for the notification");
@@ -26,19 +26,8 @@ function App() {
   }
 
   useEffect(() => {
-    // Req user for notification permission
     requestPermission();
   }, []);
-
-  // const dispatch  = useDispatch();
-  // const idToken = localStorage.token;
-  // if (idToken) {
-  //   axios.post(BASE_URL+"/user/userInfo",{},{
-  //     headers:{
-  //       idToken,
-  //     }
-  //   })
-  // }
 
   return (
     <BrowserRouter>
@@ -47,6 +36,10 @@ function App() {
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Register />} />
         <Route exact path="*" element={<NotFound />} />
+        {/* detail */}
+        <Route exact path="/home/:homeId" element={<HomeDetail />} />
+
+        <Route exact path="/search" element={<Search />} />
         {/* <Route
           path="/"
           element={
