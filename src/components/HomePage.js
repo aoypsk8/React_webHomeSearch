@@ -1,13 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
-import athardmen from "../assets/icons/athardmen.png";
-import d from "../assets/icons/d.png";
-import otherservice from "../assets/icons/otherservice.png";
-import room from "../assets/icons/room.png";
-import sellloca from "../assets/icons/sellloca.png";
-import Home from "../assets/icons/Home.png";
-import price from "../assets/icons/price.png";
-import search from "../assets/icons/search.png";
 import banner from "../assets/banner.png";
 import Footer from "./pages/Footer";
 import { useDispatch } from "react-redux";
@@ -18,6 +10,10 @@ import { BASE_URL } from "./config/globalKey";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { addSearchHome } from "../slice/searchHomeSlice";
+import Filtter from "./filtter";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/swiper-bundle.css";
 function HomePage() {
   const dispatch = useDispatch();
   const [homes, setHomes] = useState([]);
@@ -32,7 +28,7 @@ function HomePage() {
 
   // console.log(homes);
   // console.log(home);
-  
+
   useEffect(() => {
     setTimeout(() => {
       if (home?.data) {
@@ -52,7 +48,7 @@ function HomePage() {
       .get(`${BASE_URL}/home/getBySearch?search=${value}`)
       .then((response) => {
         setSearchResults(response.data.data);
-        if (searchResults.length > 0 ) {
+        if (searchResults.length > 0) {
           dispatch(addSearchHome(response.data.data));
         }
       })
@@ -61,126 +57,146 @@ function HomePage() {
     console.log(searchResults);
   };
   return (
-    <div className="font-Noto bg-background ">
+    <div className="font-Noto bg-[#fff] ">
+      {/*=============== Navbar =================*/}
       <Navbar />
-      <div className="">
-        <img src={banner} alt="banner" className=" h-[386px] w-[1540px] " />
-      </div>
-      <div className="flex ">
-        {/* Sidebar */}
-        <div className="w-[23%]  ">
-          <div className="mt-[30px] text-xl flex justify-center">
-            <p className="">ການບໍລິການອື່ນໆ</p>
-          </div>
-          <div className="grid grid-cols-2 gap-2 py-6 text-gray px-10 ml-2 ">
-            <Button icon={Home} text="ບ້ານ" />
-            <Button icon={room} text="ຫ້ອງແຖວ" />
-            <Button icon={athardmen} text="ອາພາດເມັ້ນ" />
-            <Button icon={sellloca} text="ຂາຍດິນ" />
-            <Button icon={d} text="ແກ່ເຄື່ອງ" />
-            <Button icon={otherservice} text="ບໍລິການອື່ນໆ" />
-          </div>
-        </div>
-        {/* Main Content */}
-        <div className="ml-20 my-9 pl-10 ">
-          {/* filtter search */}
-          <div>
-            <div className="grid grid-cols-3 gap-4 ">
-              <div className="relative flex items-center text-gray-400 focus-within:text-gray-600 col-span-2 w-auto h-[60px] ">
-                <img
-                  src={search}
-                  alt="search"
-                  className="w-5 h-5 absolute ml-3 pointer-events-none"
-                />
 
-                <input
-                  value={searchValue}
-                  onChange={handleSearch}
-                  autoComplete="off"
-                  type="text"
-                  name="search"
-                  placeholder="ຄົ້ນຫາຫ້ອງແຖວທີ່ຕ້ອງການ"
-                  aria-label="Search "
-                  className="w-full h-[55px] pl-10 font-semibold placeholder-gray-500 
-              text-black rounded-[6px] border-none  ring-borderInput
-               focus:ring-borderInput search-fillter"
-                />
-              </div>
-              <select className="col-span-1  h-[55px] rounded-[6px] flex items-center">
-                <option className="">ລາຄາ</option>
-              </select>
-            </div>
-
-            {searchValue && searchResults.length > 0 && (
-              <div className="absolute items-center w-[575px] z-50 ">
-                {searchResults.map((item) => {
-                  return (
-                    <Link
-                      to={`/search`}
-                      style={{ textDecoration: "none" }}
-                      key={item._id}
-                    >
-                      <div className="bg-[#d7d4d4] w-full h-[70px]">
-                        <div className="flex  ">
-                          <p className="mx-2 text-xl">
-                            {item.addressId.village}
-                          </p>
-                          <p className="mx-2 text-xl">
-                            {item.addressId.district}
-                          </p>
-                          <p className="mx-2 text-xl">
-                            {item.addressId.province}
-                          </p>
-                        </div>
-                        <TextComponent text={item.description} maxLength={50} />
-                      </div>
-                    </Link>
-                  );
-                })}
-              </div>
-            )}
-            {/* <select className="col-span-1  h-[55px] rounded-[6px]">
-              <option>ບ້ານສົມສະໝຸກ</option>
-            </select>
-            <select className="col-span-1  h-[55px] rounded-[6px]">
-              <option>ເມືອງຫາດຊາຍຝອງ</option>
-            </select>
-            <select className="col-span-1  h-[55px] rounded-[6px]">
-              <option>ນະຄອນຫຼວງວຽງຈັນ</option>
-            </select> */}
-          </div>
-          {/* content grid */}
-          <div className="grid grid-cols-3 gap-4 mt-7">
-            {homes ? (
-              homes.map((item) => {
-                return (
-                  <div key={item._id}>
-                    <CardHome data={item} imgPrice={price} />
+      {/*=============== content =================*/}
+      <div className="relative  h-auto]  ">
+        {/*=============== Banner =================*/}
+        <img
+          src={banner}
+          alt="banner"
+          className=" h-[386px] w-[1540px] object-cover z-10"
+        />
+        {/*=============== Filtter =================*/}
+        <Filtter />
+        {/* =============== ຂໍ້ສະເຫນີພິເສດ ================= */}
+        <p className="text-xl text-[#575757] pt-28 font-bold mt-44 mx-40">
+          ຂໍສະເໜີພິເສດ
+        </p>
+        <div className="mx-40 mt-4 ">
+          <div className="w-full h-full overflow-hidden">
+            <Swiper
+              className="h-full"
+              slidesPerView={2}
+              freeMode={true}
+              grabCursor={true}
+            >
+              <div className="swiper-wrapper ">
+                <SwiperSlide>
+                  <div className="bg-textColor h-[190px] w-full rounded-xl">
+                    Slide 1
                   </div>
-                );
-              })
-            ) : (
-              <div>Loadding.....</div>
-            )}
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div className="bg-textColor h-[190px] w-full ml-2 rounded-xl">
+                    Slide 2
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div className="bg-textColor h-[190px] w-full ml-4 rounded-xl">
+                    Slide 3
+                  </div>
+                </SwiperSlide>
+              </div>
+            </Swiper>
+          </div>
+        </div>
+        {/* =============== ສະຖານທີ່ຍອດນິຍົມ ================= */}
+        <div className="mt-32 flex justify-center">
+          <p className="text-2xl text-[#575757] font-bold ">ສະຖານທີ່ຍອດນິຍົມ</p>
+        </div>
+        <div className="h-[200px]  mx-40 mt-6 flex justify-around ">
+          <div className="h-[140px] w-[140px] bg-logoColor rounded-full flex justify-center items-center relative">
+            <div className=" items-center absolute top-[105%]">
+              <p className=" font-bold text-base mx-10">ດົງໂດກ</p>
+              <p className=" text-[#575757] text-base ">ໄຊທານີ, ນະຄອນຫຼວງ</p>
+            </div>
+          </div>
+          <div className="h-[140px] w-[140px] bg-logoColor rounded-full flex justify-center items-center relative">
+            <div className=" items-center absolute top-[105%]">
+              <p className=" font-bold text-base mx-10">ດົງໂດກ</p>
+              <p className=" text-[#575757] text-base ">ໄຊທານີ, ນະຄອນຫຼວງ</p>
+            </div>
+          </div>
+          <div className="h-[140px] w-[140px] bg-logoColor rounded-full flex justify-center items-center relative">
+            <div className=" items-center absolute top-[105%]">
+              <p className=" font-bold text-base mx-10">ດົງໂດກ</p>
+              <p className=" text-[#575757] text-base ">ໄຊທານີ, ນະຄອນຫຼວງ</p>
+            </div>
+          </div>
+          <div className="h-[140px] w-[140px] bg-logoColor rounded-full flex justify-center items-center relative">
+            <div className=" items-center absolute top-[105%]">
+              <p className=" font-bold text-base mx-10">ດົງໂດກ</p>
+              <p className=" text-[#575757] text-base ">ໄຊທານີ, ນະຄອນຫຼວງ</p>
+            </div>
+          </div>
+          <div className="h-[140px] w-[140px] bg-logoColor rounded-full flex justify-center items-center relative">
+            <div className=" items-center absolute top-[105%]">
+              <p className=" font-bold text-base mx-10">ດົງໂດກ</p>
+              <p className=" text-[#575757] text-base ">ໄຊທານີ, ນະຄອນຫຼວງ</p>
+            </div>
+          </div>
+          <div className="h-[140px] w-[140px] bg-logoColor rounded-full flex justify-center items-center relative">
+            <div className=" items-center absolute top-[105%]">
+              <p className=" font-bold text-base mx-10">ດົງໂດກ</p>
+              <p className=" text-[#575757] text-base ">ໄຊທານີ, ນະຄອນຫຼວງ</p>
+            </div>
+          </div>
+        </div>
+        {/* =============== ສຳຫຼວດທີ່ຢູ່ອາໄສ ================= */}
+        <div className="mt-16 flex justify-center">
+          <p className="text-2xl text-[#575757] font-bold ">ສຳຫຼວດທີ່ຢູ່ອາໄສ</p>
+        </div>
+        <div className="h-[240px]  mx-40 mt-6 flex justify-between">
+          <div className=" w-[250px] h-[240px] border border-[#E0E0E0] shadow-sm">
+            <div className="w-full h-[160px] bg-logoColor"></div>
+            <div className="m-4 ">
+              <p className="text-sm font-bold">ເຮືອນ</p>
+              <p className="text-xs text-[#575757]">2,450 ແຫ່ງ</p>
+            </div>
+          </div>
+          <div className=" w-[250px] h-[240px] border border-[#E0E0E0] shadow-sm">
+            <div className="w-full h-[160px] bg-logoColor"></div>
+            <div className="m-4">
+              <p className="text-sm font-bold">ເຮືອນ</p>
+              <p className="text-xs text-[#575757]">2,450 ແຫ່ງ</p>
+            </div>
+          </div>
+          <div className=" w-[250px] h-[240px] border border-[#E0E0E0] shadow-sm">
+            <div className="w-full h-[160px] bg-logoColor"></div>
+            <div className="m-4">
+              <p className="text-sm font-bold">ເຮືອນ</p>
+              <p className="text-xs text-[#575757]">2,450 ແຫ່ງ</p>
+            </div>
+          </div>
+          <div className=" w-[250px] h-[240px] border border-[#E0E0E0] shadow-sm">
+            <div className="w-full h-[160px] bg-logoColor"></div>
+            <div className="m-4">
+              <p className="text-sm font-bold">ເຮືອນ</p>
+              <p className="text-xs text-[#575757]">2,450 ແຫ່ງ</p>
+            </div>
           </div>
         </div>
       </div>
 
+      {/*=============== Footer =================*/}
       <Footer />
     </div>
   );
 }
+
 function Button({ icon, text }) {
   return (
-    <div className="grid-button">
-      <img src={icon} alt={text} className="grid-img" />
-      <p className="font-bold">{text}</p>
+    <div className="grid-button relative hover:text-white text-gray">
+      <img src={icon} alt={text} className=" " />
+      <p className="absolute top-16 text-sm font-bold  ">{text}</p>
     </div>
   );
 }
-
-export default HomePage;
 const TextComponent = ({ text, maxLength }) => {
   const displayText = text.slice(0, maxLength) + ".....";
   return <p className="mx-2 text-lg">{displayText}</p>;
 };
+export default HomePage;

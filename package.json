@@ -23,6 +23,7 @@
     "redux-thunk": "^2.4.2",
     "stringify": "^5.2.0",
     "sweetalert2": "^11.7.3",
+    "swiper": "^9.1.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

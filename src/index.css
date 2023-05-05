@@ -5,7 +5,7 @@
 
 @layer components{
     .text-style{
-        @apply text-xl items-center hover:text-textColor hover:cursor-pointer font-semibold
+        @apply text-lg text-[#999999] items-center hover:text-textColor hover:cursor-pointer hover:border-b-4  font-semibold  h-[125%] flex justify-center
     }
     .button-style{
         @apply w-32 h-10 flex items-center justify-around bg-buttonColor rounded-lg
@@ -15,13 +15,14 @@
         @apply hover:text-buttonColor  w-32 h-10  flex items-center justify-evenly
     }
     .grid-button{
-        @apply bg-white w-24 h-20 flex flex-col justify-center items-center rounded-xl my-4 hover:bg-buttonColor hover:text-white
+        @apply bg-white w-[64px] h-[64px] flex flex-col justify-center items-center rounded-xl my-4 hover:bg-buttonColor hover:text-white
     }
     .text-title-contact{
-        @apply text-white font-bold text-lg
+        @apply text-[#575757] font-bold text-lg
     }
     .text-sub-contact{
-        @apply text-white  text-sm mt-1
+        @apply text-[#575757]  text-sm mt-1
     }
+    
     
 }

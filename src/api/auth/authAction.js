@@ -8,7 +8,7 @@ export const loginUser =
     try {
       const user = await doLogin(phoneNumber, password, drivertoken);
       console.log(user);
-      Swal.fire(user.message);
+      Swal.fire("Login !", user.message, "success");
       localStorage.setItem("token", user.data.token);
       dispatch(login(user));
       return true;

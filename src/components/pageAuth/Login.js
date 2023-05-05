@@ -12,7 +12,7 @@ const Login = () => {
     password: "",
   });
 
-  const driverToken = localStorage.driverToken
+  const driverToken = localStorage.driverToken;
 
   console.log("drivertoken = ", driverToken);
 
@@ -22,7 +22,9 @@ const Login = () => {
       [e.target.name]: e.target.value,
     });
   };
-  useEffect(()=>{})
+  useEffect(() => {
+    // window.location.reload();
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();

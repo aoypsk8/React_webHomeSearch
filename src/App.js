@@ -37,7 +37,7 @@ function App() {
         <Route exact path="/register" element={<Register />} />
         <Route exact path="*" element={<NotFound />} />
         {/* detail */}
-        <Route exact path="/home/:homeId" element={<HomeDetail />} />
+        {/* <Route exact path="/home/:homeId" element={<HomeDetail />} /> */}
 
         <Route exact path="/search" element={<Search />} />
         {/* <Route
