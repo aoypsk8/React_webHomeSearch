@@ -52,10 +52,10 @@ function Filtter() {
         {/*=============== Button ເຮືອນເຊົ່າ && ເຮືອນຂາຍ=================*/}
         <div className="h-[60px] w-auto mx-[450px]  flex items-center justify-around  rounded-xl  text-white">
           {/* hover:outline hover:outline-buttonColor hover:bg-opacity-5 hover:cursor-pointer */}
-          <div className=" h-[100%] w-[100%] rounded-l-xl flex justify-center items-center hover:outline hover:outline-[#00B8D1] hover:text-buttonColor hover:bg-opacity-0 hover:cursor-pointer bg-[#00B8D1]">
+          <div className=" h-[100%] w-[100%] rounded-l-xl flex justify-center items-center outline outline-[#00B8D1] hover:text-buttonColor hover:bg-opacity-0 hover:cursor-pointer bg-[#00B8D1]">
             <p className="text-lg font-bold ">ເຮືອນເຊົ່າ</p>
           </div>
-          <div className=" h-[100%] w-[100%]  rounded-r-xl flex justify-center items-center hover:outline hover:outline-[#00B8D1] hover:text-buttonColor hover:bg-opacity-0 hover:cursor-pointer bg-[#00B8D1]">
+          <div className=" h-[100%] w-[100%]  rounded-r-xl flex justify-center items-center outline outline-[#00B8D1] hover:text-buttonColor hover:bg-opacity-0 hover:cursor-pointer bg-[#00B8D1]">
             <p className="text-lg font-bold ">ເຮືອນຂາຍ</p>
           </div>
         </div>
@@ -108,7 +108,7 @@ function Filtter() {
         {/*=============== filtter max min =================*/}
         <div className="flex items-center text-gray-400  col-span-2 w-auto h-[60px] mx-14 mt-4">
           {/* Min */}
-          <div className="relative flex items-center text-gray-400 col-span-2 w-1/4 h-[60px] mr-5">
+          <div className="relative flex items-center text-gray-400 col-span-2 w-1/4 h-[60px] ">
             <p className="w-5 absolute ml-3 pointer-events-none text-lg font-bold">
               Min
             </p>
@@ -125,6 +125,7 @@ function Filtter() {
             />
           </div>
           {/* max */}
+          <hr className="w-5 border border-gray"></hr>
           <div className="relative flex items-center text-gray-400  col-span-2 w-1/4 h-[60px]  mr-5 ">
             <p className="w-5  absolute ml-3 pointer-events-none text-lg font-bold">
               Max

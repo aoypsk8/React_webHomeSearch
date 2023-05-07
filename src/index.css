@@ -5,17 +5,17 @@
 
 @layer components{
     .text-style{
-        @apply text-lg text-[#999999] items-center hover:text-textColor hover:cursor-pointer hover:border-b-4  font-semibold  h-[125%] flex justify-center
+        @apply text-lg text-[#999999] items-center hover:text-[#00B8D1] hover:cursor-pointer hover:border-b-4  font-semibold  h-[125%] flex justify-center
     }
     .button-style{
-        @apply w-32 h-10 flex items-center justify-around bg-buttonColor rounded-lg
-        hover:outline hover:outline-buttonColor hover:bg-opacity-5 hover:cursor-pointer
+        @apply w-32 h-10 flex items-center justify-around bg-[#00B8D1] rounded-lg
+        outline outline-[#00B8D1] hover:bg-opacity-5 hover:cursor-pointer
     }
     .menu-button{
-        @apply hover:text-buttonColor  w-32 h-10  flex items-center justify-evenly
+        @apply hover:text-[#00B8D1]  w-32 h-10  flex items-center justify-evenly
     }
     .grid-button{
-        @apply bg-white w-[64px] h-[64px] flex flex-col justify-center items-center rounded-xl my-4 hover:bg-buttonColor hover:text-white
+        @apply bg-white w-[64px] h-[64px] flex flex-col justify-center items-center rounded-xl my-4 hover:bg-[#00B8D1] hover:text-white
     }
     .text-title-contact{
         @apply text-[#575757] font-bold text-lg
