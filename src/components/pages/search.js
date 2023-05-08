@@ -92,7 +92,7 @@ function Search() {
             <div className=" w-full mt-4 flex">
               <div className=" h-12 w-36 px-3 rounded-xl border border-gray flex justify-between items-center">
                 <img src={distance} alt="distance" className="w-4 h-4" />
-                <p className="text-lg">60 m2</p>
+                <p className="text-lg">60 ㎡</p>
               </div>
               <div className="w-4"></div>
               <div className="ml-1 h-12 w-36 px-3 rounded-xl border border-gray flex justify-between items-center">
@@ -468,7 +468,7 @@ function Search() {
                 <div className=" w-full mt-6 px-3 flex">
                   <div className=" h-10 w-28 rounded-xl border border-gray flex justify-evenly items-center">
                     <img src={distance} alt="distance" className="w-4 h-4" />
-                    <p className="text-sm">60 m2</p>
+                    <p className="text-sm">60 ㎡</p>
                   </div>
                   <div className="ml-1 h-10 w-28 rounded-xl border border-gray flex justify-evenly items-center">
                     <img src={floor} alt="distance" className="w-4 h-4" />
@@ -572,7 +572,7 @@ function Search() {
                 <div className=" w-full mt-6 px-3 flex">
                   <div className=" h-10 w-28 rounded-xl border border-gray flex justify-evenly items-center">
                     <img src={distance} alt="distance" className="w-4 h-4" />
-                    <p className="text-sm">60 m2</p>
+                    <p className="text-sm">60 ㎡</p>
                   </div>
                   <div className="ml-1 h-10 w-28 rounded-xl border border-gray flex justify-evenly items-center">
                     <img src={floor} alt="distance" className="w-4 h-4" />
@@ -676,7 +676,7 @@ function Search() {
                 <div className=" w-full mt-6 px-3 flex">
                   <div className=" h-10 w-28 rounded-xl border border-gray flex justify-evenly items-center">
                     <img src={distance} alt="distance" className="w-4 h-4" />
-                    <p className="text-sm">60 m2</p>
+                    <p className="text-sm">60 ㎡</p>
                   </div>
                   <div className="ml-1 h-10 w-28 rounded-xl border border-gray flex justify-evenly items-center">
                     <img src={floor} alt="distance" className="w-4 h-4" />
@@ -780,7 +780,7 @@ function Search() {
                 <div className=" w-full mt-6 px-3 flex">
                   <div className=" h-10 w-28 rounded-xl border border-gray flex justify-evenly items-center">
                     <img src={distance} alt="distance" className="w-4 h-4" />
-                    <p className="text-sm">60 m2</p>
+                    <p className="text-sm">60 ㎡</p>
                   </div>
                   <div className="ml-1 h-10 w-28 rounded-xl border border-gray flex justify-evenly items-center">
                     <img src={floor} alt="distance" className="w-4 h-4" />
@@ -884,7 +884,7 @@ function Search() {
                 <div className=" w-full mt-6 px-3 flex">
                   <div className=" h-10 w-28 rounded-xl border border-gray flex justify-evenly items-center">
                     <img src={distance} alt="distance" className="w-4 h-4" />
-                    <p className="text-sm">60 m2</p>
+                    <p className="text-sm">60 ㎡</p>
                   </div>
                   <div className="ml-1 h-10 w-28 rounded-xl border border-gray flex justify-evenly items-center">
                     <img src={floor} alt="distance" className="w-4 h-4" />
@@ -988,7 +988,7 @@ function Search() {
                 <div className=" w-full mt-6 px-3 flex">
                   <div className=" h-10 w-28 rounded-xl border border-gray flex justify-evenly items-center">
                     <img src={distance} alt="distance" className="w-4 h-4" />
-                    <p className="text-sm">60 m2</p>
+                    <p className="text-sm">60 ㎡</p>
                   </div>
                   <div className="ml-1 h-10 w-28 rounded-xl border border-gray flex justify-evenly items-center">
                     <img src={floor} alt="distance" className="w-4 h-4" />

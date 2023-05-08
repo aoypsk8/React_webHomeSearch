@@ -180,6 +180,7 @@ function HomePage() {
           </div>
         </div>
       </div>
+      <div className="w-10 h-7"></div>
 
       {/*=============== Footer =================*/}
       <Footer />

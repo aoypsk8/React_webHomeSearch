@@ -1,37 +1,36 @@
-.box1{
-    margin: 100px;
-    width: 20rem;
-    height: 4rem;
-    background-color: blue;
-    color: aliceblue;
-    font-weight: 500;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+.box1 {
+  margin: 100px;
+  width: 20rem;
+  height: 4rem;
+  background-color: blue;
+  color: aliceblue;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
-.box1::before{
-    content: "";
-    position: absolute;
-    background-color: blue;
-    width: 2rem;
-    height: 2rem;
-    transform: rotate(45deg);
-    top: 70%;
-    bottom: -0.75rem;
-    left: 5rem;
+.flot-box::before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  transform: rotate(45deg);
+  position: absolute;
+  border: 2px solid #00B8D1;
+  top: 85%;
+  left: 45%;
+  background-color: #fff;
 }
 
-
-.container-slide{
-    display: flex;
-    max-width: 455px;
+.container-slide {
+  display: flex;
+  max-width: 455px;
 }
-.inner{
-    display: flex;
-    justify-content: space-between;
+.inner {
+  display: flex;
+  justify-content: space-between;
 }
-.carousel{
-    cursor: grab;
-    overflow: hidden;
+.carousel {
+  cursor: grab;
+  overflow: hidden;
 }

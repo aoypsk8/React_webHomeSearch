@@ -11,11 +11,13 @@ import poor from "../../assets/icons/poor.png";
 import air from "../../assets/icons/air.png";
 import fish from "../../assets/icons/fish.png";
 import fan from "../../assets/icons/fan.png";
+import garage from "../../assets/icons/garage.png";
 import car from "../../assets/icons/car.png";
 import camera from "../../assets/icons/camera.png";
 import "./style.css";
 
 import { motion } from "framer-motion";
+import Footer from "../pages/Footer";
 function Detail() {
   const carousel = useRef();
   const [width, setWidth] = useState(0);
@@ -26,7 +28,7 @@ function Detail() {
   }, []);
 
   return (
-    <div className="font-Noto h-[1500px]">
+    <div className="font-Noto h-auto">
       <Navbar />
       <div className="w-full h-[105px] bg-[#00292F] px-40 flex  py-6 ">
         <div className="relative flex items-center col-span-2 w-11/12 h-[60px]">
@@ -191,7 +193,6 @@ function Detail() {
         </div>
       </div>
       {/* other and maping  */}
-
       <div className="w-full h-[230px] px-40 flex mt-4">
         {/* ສິ່ງອຳນວຍຄວາມສະດວກ */}
         <div className="h-full w-1/3  mr-1 border border-[#E0E0E0] rounded-xl p-4">
@@ -221,18 +222,307 @@ function Detail() {
                 <p className="text-lg  ml-2">ສວນດອກໄມ້</p>
               </div>
               <div className="flex  items-center mt-2">
-                <img src={car} alt="poot" className="w-5" />
+                <img src={garage} alt="poot" className="w-5" />
                 <p className="text-lg ml-2">ໂຮງຈອດລົດ</p>
               </div>
-              <div className="flex  items-center mt-2">
+              <div className="flex items-center mt-2">
                 <img src={camera} alt="poot" className="w-5" />
                 <p className="text-lg ml-2">ກ້ອງວົງຈອນປິດ</p>
               </div>
             </div>
           </div>
         </div>
-        <div className="h-full w-2/3 bg-logoColor ml-1"></div>
+        <div className="h-full w-2/3  ml-1 flex  border border-[#E0E0E0] rounded-xl">
+          <div className="h-full w-2/5 p-4">
+            <p className="text-2xl font-bold">ທີ່ດິນ</p>
+            <p className="mt-6 text-base font-medium">
+              ເນື້ອທີ່ທັ້ງໝົດ 60 ㎡ ແລະ ຕິດໜ້າທາງ 8 m
+            </p>
+            {/* line */}
+            <div className="w-full mt-4 pr-14">
+              <div className="border border-gray "></div>
+            </div>
+            <div className="flex  items-center mt-4">
+              <img src={car} alt="car" />
+              <p className="ml-2 text-base font-medium">
+                ຂັບລົດຈາກຕົວເມືອງ 15 ນາທີ
+              </p>
+            </div>
+          </div>
+          <div className="bg-logoColor h-full w-3/5"></div>
+        </div>
       </div>
+      {/* table detail price */}
+      <div className="w-full h-[470px] px-40 mt-4">
+        <div className="w-full h-full border border-[#E0E0E0] rounded-xl  py-5 px-6 relative ">
+          {/* flot package  */}
+          <div className="w-full absolute flex pl-[180px]">
+            <div className="w-[230px] h-[70px]  flex justify-center items-center border-2 border-[#00B8D1] relative">
+              <div className="absolute w-full h-full bg-[#fff] z-10"></div>
+              <div className=" flot-box z-0"></div>
+              <p className="text-2xl font-bold text-[#00B8D1] z-50">
+                ແພັກເລີ່ມຕົ້ນ
+              </p>
+            </div>
+            <div className="w-[230px] h-[70px] ml-4  flex justify-center items-center border-2 border-[#00B8D1] relative">
+              <div className="absolute w-full h-full bg-[#fff] z-10"></div>
+              <div className=" flot-box z-0"></div>
+              <p className="text-2xl font-bold text-[#00B8D1] z-50">
+                ຈ່າຍກ່ອນ 3 ເດືອນ
+              </p>
+            </div>
+            <div className="w-[230px] h-[70px] ml-4  flex justify-center items-center border-2 border-[#00B8D1] relative">
+              <div className="absolute w-full h-full bg-[#fff] z-10"></div>
+              <div className=" flot-box z-0"></div>
+              <p className="text-2xl font-bold text-[#00B8D1] z-50">
+                ຈ່າຍກ່ອນ 6 ເດືອນ
+              </p>
+            </div>
+            <div className="w-[230px] h-[70px] ml-4  flex justify-center items-center border-2 border-[#00B8D1] relative">
+              <div className="absolute w-full h-full bg-[#fff] z-10"></div>
+              <div className=" flot-box z-0"></div>
+              <p className="text-2xl font-bold text-[#00B8D1] z-50">
+                ຈ່າຍກ່ອນ 1 ປີ
+              </p>
+            </div>
+          </div>
+          {/* table */}
+          <div className="w-full h-full mt-16">
+            {/* 1 table */}
+            <div className="w-full h-1/6 flex items-center ">
+              <div className="w-[180px] h-full items-center flex pl-10 ">
+                <p className="text-xl font-bold">ຄ່າເຊົ່າ</p>
+              </div>
+              <div className="w-[1px] h-full border border-[#E0E0E0]"></div>
+              <div className="w-[180px] h-full items-center flex justify-center pl-10 mr-12">
+                <p className="text-lg font-medium">₭ 1,500,000/ເດືອນ</p>
+              </div>
+              <div className="w-[1px] h-full border border-[#E0E0E0] mr-2"></div>
+              <div className="w-[1px] h-full border border-[#E0E0E0] ml-2"></div>
+
+              <div className="w-[180px] h-full items-center flex justify-center pl-10 mr-12">
+                <p className="text-lg font-medium">₭ 1,425,000/ເດືອນ</p>
+              </div>
+              <div className="w-[1px] h-full border border-[#E0E0E0] mr-2"></div>
+              <div className="w-[1px] h-full border border-[#E0E0E0] ml-2"></div>
+              <div className="w-[180px] h-full items-center flex justify-center pl-10 mr-12">
+                <p className="text-lg font-medium">₭ 1,350,000/ເດືອນ</p>
+              </div>
+              <div className="w-[1px] h-full border border-[#E0E0E0] mr-2"></div>
+              <div className="w-[1px] h-full border border-[#E0E0E0] ml-2"></div>
+              <div className="w-[180px] h-full items-center flex justify-center pl-10 mr-12">
+                <p className="text-lg font-medium">₭ 1,275,000/ເດືອນ</p>
+              </div>
+              <div className="w-[1px] h-full border border-[#E0E0E0]"></div>
+            </div>
+            {/* 2 table */}
+            <div className="w-full h-1/6 bg-[#00B8D1] bg-opacity-[8%] flex items-center">
+              <div className="w-[180px] h-full items-center flex pl-10 ">
+                <p className="text-xl font-bold">ຄ່າມັດຈຳ</p>
+              </div>
+              <div className="w-[1px] h-full border border-[#E0E0E0]"></div>
+              <div className="w-[180px] h-full items-center flex justify-center pl-10 mr-12">
+                <p className="text-lg font-medium">₭ 500,000</p>
+              </div>
+              <div className="w-[1px] h-full border border-[#E0E0E0] mr-2"></div>
+              <div className="w-[1px] h-full border border-[#E0E0E0] ml-2"></div>
+
+              <div className="w-[180px] h-full items-center flex justify-center pl-10 mr-12">
+                <p className="text-lg font-medium"> - </p>
+              </div>
+              <div className="w-[1px] h-full border border-[#E0E0E0] mr-2"></div>
+              <div className="w-[1px] h-full border border-[#E0E0E0] ml-2"></div>
+              <div className="w-[180px] h-full items-center flex justify-center pl-10 mr-12">
+                <p className="text-lg font-medium"> - </p>
+              </div>
+              <div className="w-[1px] h-full border border-[#E0E0E0] mr-2"></div>
+              <div className="w-[1px] h-full border border-[#E0E0E0] ml-2"></div>
+              <div className="w-[180px] h-full items-center flex justify-center pl-10 mr-12">
+                <p className="text-lg font-medium"> - </p>
+              </div>
+              <div className="w-[1px] h-full border border-[#E0E0E0]"></div>
+            </div>
+            {/* 3 table */}
+            <div className="w-full h-1/6 flex items-center">
+              <p className="w-[180px] h-full items-center flex pl-10 text-xl font-bold">
+                ຄ່າຂີ້ເຫຍື່ອ
+              </p>
+              <div className="w-[1px] h-full border border-[#E0E0E0]"></div>
+              <p className="w-[180px] h-full items-center flex ml-12 text-lg font-medium">
+                ₭ 50,000/ເດືອນ
+              </p>
+              <div className="w-[1px] h-full border border-[#E0E0E0] mr-2"></div>
+              <div className="w-[1px] h-full border border-[#E0E0E0] ml-2"></div>
+              <p className="w-[180px] h-full items-center flex ml-12 ">
+                ₭ 50,000/ເດືອນ
+              </p>
+              <div className="w-[1px] h-full border border-[#E0E0E0] mr-2"></div>
+              <div className="w-[1px] h-full border border-[#E0E0E0] ml-2"></div>
+              <p className="w-[180px] h-full items-center flex ml-12 ">
+                ₭ 50,000/ເດືອນ
+              </p>
+              <div className="w-[1px] h-full border border-[#E0E0E0] mr-2"></div>
+              <div className="w-[1px] h-full border border-[#E0E0E0] ml-2"></div>
+              <p className="w-[180px] h-full items-center flex ml-12 ">
+                ₭ 50,000/ເດືອນ
+              </p>
+              <div className="w-[1px] h-full border border-[#E0E0E0]"></div>
+            </div>
+            {/* 2 table */}
+            <div className="w-full h-1/6 bg-[#00B8D1] bg-opacity-[8%] flex items-center ">
+              <div className="w-[180px] h-full items-center flex pl-10 ">
+                <p className="text-xl font-bold">ສ່ວນຫຼຸດ</p>
+              </div>
+              <div className="w-[1px] h-full border border-[#E0E0E0]"></div>
+              <div className="w-[180px] h-full items-center flex justify-center pl-10 mr-12">
+                <p className="text-lg font-medium">-</p>
+              </div>
+              <div className="w-[1px] h-full border border-[#E0E0E0] mr-2"></div>
+              <div className="w-[1px] h-full border border-[#E0E0E0] ml-2"></div>
+
+              <div className="w-[180px] h-full items-center flex justify-center pl-10 mr-12">
+                <p className="text-lg font-medium">5 %</p>
+              </div>
+              <div className="w-[1px] h-full border border-[#E0E0E0] mr-2"></div>
+              <div className="w-[1px] h-full border border-[#E0E0E0] ml-2"></div>
+              <div className="w-[180px] h-full items-center flex justify-center pl-10 mr-12">
+                <p className="text-lg font-medium">10 %</p>
+              </div>
+              <div className="w-[1px] h-full border border-[#E0E0E0] mr-2"></div>
+              <div className="w-[1px] h-full border border-[#E0E0E0] ml-2"></div>
+              <div className="w-[180px] h-full items-center flex justify-center pl-10 mr-12">
+                <p className="text-lg font-medium">15%</p>
+              </div>
+              <div className="w-[1px] h-full border border-[#E0E0E0]"></div>
+            </div>
+            {/* button */}
+            <div className="w-full h-12 pl-[180px] mt-4 flex">
+              <div className="w-[230px] h-full  bg-logoColor rounded-md flex items-center justify-center">
+                <p className="text-xl font-medium text-[#fff]">ເລືອກຊຳລະ</p>
+              </div>
+              <div className="w-[230px] h-full  bg-logoColor rounded-md flex items-center justify-center ml-4">
+                <p className="text-xl font-medium text-[#fff]">ເລືອກຊຳລະ</p>
+              </div>
+              <div className="w-[230px] h-full  bg-logoColor rounded-md flex items-center justify-center ml-4">
+                <p className="text-xl font-medium text-[#fff]">ເລືອກຊຳລະ</p>
+              </div>
+              <div className="w-[230px] h-full  bg-logoColor rounded-md flex items-center justify-center ml-4">
+                <p className="text-xl font-medium text-[#fff]">ເລືອກຊຳລະ</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* ລາຍລະອຽດທີ່ພັກ */}
+      <div className="w-full h-[720px] px-40 mt-4">
+        <div className="w-full h-full border border-[#E0E0E0] rounded-xl p-4">
+          <p className="text-2xl font-bold ">ລາຍລະອຽດທີ່ພັກ</p>
+          {/* floor 1 */}
+          <div className="mt-6 w-full h-[185px] flex">
+            <div className="w-[150px] h-full bg-[#00B8D1] rounded-md flex flex-col justify-center items-center">
+              <p className="text-2xl font-bold text-[#fff]">ຊັ້ນ 1</p>
+              <p className="text-[#fff]">ພື້ນທີ່ 25 ㎡</p>
+            </div>
+            <div className="w-1/6 h-full ml-3 border-2 border-[#E0E0E0] rounded-md">
+              <div className="w-full h-3/4 bg-[#00B8D1] rounded-t-md"></div>
+              <div className="w-full h-1/4 flex justify-center items-center ">
+                <p>ຫ້ອງນອນ 8x8 m</p>
+              </div>
+            </div>
+            <div className="w-1/6 h-full ml-3 border-2 border-[#E0E0E0] rounded-md">
+              <div className="w-full h-3/4 bg-[#00B8D1] rounded-t-md"></div>
+              <div className="w-full h-1/4 flex justify-center items-center ">
+                <p>ຫ້ອງນອນ 8x8 m</p>
+              </div>
+            </div>
+            <div className="w-1/6 h-full ml-3 border-2 border-[#E0E0E0] rounded-md">
+              <div className="w-full h-3/4 bg-[#00B8D1] rounded-t-md"></div>
+              <div className="w-full h-1/4 flex justify-center items-center ">
+                <p>ຫ້ອງນອນ 8x8 m</p>
+              </div>
+            </div>
+            <div className="w-1/6 h-full ml-3 border-2 border-[#E0E0E0] rounded-md">
+              <div className="w-full h-3/4 bg-[#00B8D1] rounded-t-md"></div>
+              <div className="w-full h-1/4 flex justify-center items-center ">
+                <p>ຫ້ອງນອນ 8x8 m</p>
+              </div>
+            </div>
+            <div className="w-1/6 h-full ml-3 border-2 border-[#E0E0E0] rounded-md">
+              <div className="w-full h-3/4 bg-[#00B8D1] rounded-t-md"></div>
+              <div className="w-full h-1/4 flex justify-center items-center ">
+                <p>ຫ້ອງນອນ 8x8 m</p>
+              </div>
+            </div>
+          </div>
+          {/* Line */}
+          <div className="w-full my-4 border border-gray"></div>
+          {/* floor 2 */}
+          <div className="w-full h-[185px] flex">
+            <div className="w-[150px] h-full bg-[#00B8D1] rounded-md flex flex-col justify-center items-center">
+              <p className="text-2xl font-bold text-[#fff]">ຊັ້ນ 2</p>
+              <p className="text-[#fff]">ພື້ນທີ່ 20 ㎡</p>
+            </div>
+            <div className="w-1/6 h-full ml-3 border-2 border-[#E0E0E0] rounded-md">
+              <div className="w-full h-3/4 bg-[#00B8D1] rounded-t-md"></div>
+              <div className="w-full h-1/4 flex justify-center items-center ">
+                <p>ຫ້ອງນອນ 8x8 m</p>
+              </div>
+            </div>
+            <div className="w-1/6 h-full ml-3 border-2 border-[#E0E0E0] rounded-md">
+              <div className="w-full h-3/4 bg-[#00B8D1] rounded-t-md"></div>
+              <div className="w-full h-1/4 flex justify-center items-center ">
+                <p>ຫ້ອງນອນ 8x8 m</p>
+              </div>
+            </div>
+            <div className="w-1/6 h-full ml-3 border-2 border-[#E0E0E0] rounded-md">
+              <div className="w-full h-3/4 bg-[#00B8D1] rounded-t-md"></div>
+              <div className="w-full h-1/4 flex justify-center items-center ">
+                <p>ຫ້ອງນອນ 8x8 m</p>
+              </div>
+            </div>
+            <div className="w-1/6 h-full ml-3 border-2 border-[#E0E0E0] rounded-md">
+              <div className="w-full h-3/4 bg-[#00B8D1] rounded-t-md"></div>
+              <div className="w-full h-1/4 flex justify-center items-center ">
+                <p>ຫ້ອງນອນ 8x8 m</p>
+              </div>
+            </div>
+            <div className="w-1/6 h-full ml-3 border-2 border-[#E0E0E0] rounded-md">
+              <div className="w-full h-3/4 bg-[#00B8D1] rounded-t-md"></div>
+              <div className="w-full h-1/4 flex justify-center items-center ">
+                <p>ຫ້ອງນອນ 8x8 m</p>
+              </div>
+            </div>
+          </div>
+          {/* Line */}
+          <div className="w-full my-4 border border-gray"></div>
+          {/* floor 3 */}
+          <div className="w-full h-[185px] flex">
+            <div className="w-[150px] h-full bg-[#00B8D1] rounded-md flex flex-col justify-center items-center">
+              <p className="text-2xl font-bold text-[#fff]">ທີ່ດິນ</p>
+              <p className="text-[#fff]">ພື້ນທີ່ 60 ㎡</p>
+            </div>
+            <div className="w-1/6 h-full ml-3 border-2 border-[#E0E0E0] rounded-md">
+              <div className="w-full h-3/4 bg-[#00B8D1] rounded-t-md"></div>
+              <div className="w-full h-1/4 flex justify-center items-center ">
+                <p>ສະລອຍນ້ຳ 5x5 m</p>
+              </div>
+            </div>
+            <div className="w-1/6 h-full ml-3 border-2 border-[#E0E0E0] rounded-md">
+              <div className="w-full h-3/4 bg-[#00B8D1] rounded-t-md"></div>
+              <div className="w-full h-1/4 flex justify-center items-center ">
+                <p>ສາລາ 5x5 m</p>
+              </div>
+            </div>
+            <div className="w-1/6 h-full ml-3 border-2 border-[#E0E0E0] rounded-md">
+              <div className="w-full h-3/4 bg-[#00B8D1] rounded-t-md"></div>
+              <div className="w-full h-1/4 flex justify-center items-center ">
+                <p>ສວນດອກໄມ້ 5x5 m</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <Footer />
     </div>
   );
 }

@@ -1,9 +1,9 @@
 import logo from "../../assets/logo.png";
 import React from "react";
 
-function Footer() {
+function  Footer() {
   return (
-    <div className="bg-[#F8F7F9]  mt-40 ">
+    <div className="bg-[#F8F7F9]  mt-10 ">
       <div className="flex justify-start pt-12 mx-40 h-[270px]">
         <div>
           <p className="text-title-contact">Help</p>
