@@ -3,7 +3,7 @@ import Login from "./components/pageAuth/Login";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NotFound from "./components/pages/404NotFound";
 import Register from "./components/pageAuth/Register";
-import HomePage from "./components/HomePage";
+import HomePage from "./components/pages/HomePage";
 import { useEffect } from "react";
 import { getToken } from "firebase/messaging";
 import { messaging } from "./components/config/firebase";

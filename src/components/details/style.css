@@ -16,7 +16,7 @@
   height: 20px;
   transform: rotate(45deg);
   position: absolute;
-  border: 2px solid #00B8D1;
+  border: 2px solid #00b8d1;
   top: 85%;
   left: 45%;
   background-color: #fff;
@@ -33,4 +33,8 @@
 .carousel {
   cursor: grab;
   overflow: hidden;
+}
+.container-slide-banner {
+  display: flex;
+  max-width: 100%;
 }

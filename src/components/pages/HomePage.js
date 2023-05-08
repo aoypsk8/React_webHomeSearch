@@ -1,19 +1,20 @@
-import React, { useEffect, useState } from "react";
-import Navbar from "./Navbar";
-import banner from "../assets/banner.png";
-import Footer from "./pages/Footer";
+import React, { useEffect, useRef, useState } from "react";
+import Navbar from "../Navbar";
+import banner from "../../assets/banner.png";
+import Footer from "../pages/Footer";
 import { useDispatch } from "react-redux";
-import { getAllHome } from "../api/home/homeAction";
+import { getAllHome } from "../../api/home/homeAction";
 import { useSelector } from "react-redux";
-import CardHome from "./cards/cardHome";
-import { BASE_URL } from "./config/globalKey";
+import CardHome from "../cards/cardHome";
+import { BASE_URL } from "../config/globalKey";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { addSearchHome } from "../slice/searchHomeSlice";
-import Filtter from "./filtter";
+import { addSearchHome } from "../../slice/searchHomeSlice";
+import Filtter from "../filtter";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
+import { motion } from "framer-motion";
 function HomePage() {
   const dispatch = useDispatch();
   const [homes, setHomes] = useState([]);
@@ -56,6 +57,16 @@ function HomePage() {
 
     console.log(searchResults);
   };
+
+  // slide
+  const carousel = useRef();
+  const [width, setWidth] = useState(0);
+
+  useEffect(() => {
+    setWidth(carousel.current?.scrollWidth - carousel.current?.offsetWidth);
+    console.log(carousel.current?.scrollWidth - carousel.current?.offsetWidth);
+  }, []);
+
   return (
     <div className="font-Noto bg-[#fff] ">
       {/*=============== Navbar =================*/}
@@ -75,8 +86,8 @@ function HomePage() {
         <p className="text-xl text-[#575757] pt-28 font-bold mt-44 mx-40">
           ຂໍສະເໜີພິເສດ
         </p>
-        <div className="mx-40 mt-4 ">
-          <div className="w-full h-full overflow-hidden">
+        <div className="mx-40 mt-4  ">
+          {/* <div className="w-full h-full overflow-hidden">
             <Swiper
               className="h-full"
               slidesPerView={2}
@@ -101,10 +112,41 @@ function HomePage() {
                 </SwiperSlide>
               </div>
             </Swiper>
+          </div> */}
+          <div className="w-full h-full container-slide-banner ">
+            <motion.dev
+              ref={carousel}
+              className="carousel"
+              whileTap={{ cursor: "grabbing" }}
+            >
+              <motion.dev
+                className="inner h-full "
+                drag="x"
+                dragConstraints={{ right: 0, left: -width }}
+                initial={{ x: 100 }}
+                animate={{ x: 0 }}
+              >
+                <motion.dev className="item p-1">
+                  <div className="bg-[#00B8D1] h-[190px] w-[510px] rounded-xl">
+                    Slide 1
+                  </div>
+                </motion.dev>
+                <motion.dev className="item p-1">
+                  <div className="bg-[#00B8D1] h-[190px] w-[510px] rounded-xl">
+                    Slide 1
+                  </div>
+                </motion.dev>
+                <motion.dev className="item p-1">
+                  <div className="bg-[#00B8D1] h-[190px] w-[510px] rounded-xl">
+                    Slide 1
+                  </div>
+                </motion.dev>
+              </motion.dev>
+            </motion.dev>
           </div>
         </div>
         {/* =============== ສະຖານທີ່ຍອດນິຍົມ ================= */}
-        <div className="mt-32 flex justify-center">
+        <div className="mt-20 flex justify-center">
           <p className="text-2xl text-[#575757] font-bold ">ສະຖານທີ່ຍອດນິຍົມ</p>
         </div>
         <div className="h-[200px]  mx-40 mt-6 flex justify-around ">
@@ -149,7 +191,7 @@ function HomePage() {
         <div className="mt-16 flex justify-center">
           <p className="text-2xl text-[#575757] font-bold ">ສຳຫຼວດທີ່ຢູ່ອາໄສ</p>
         </div>
-        <div className="h-[240px]  mx-40 mt-6 flex justify-between">
+        <div className="h-[240px]  mx-40 mt-6 flex justify-evenly">
           <div className=" w-[250px] h-[240px] border border-[#E0E0E0] shadow-sm">
             <div className="w-full h-[160px] bg-logoColor"></div>
             <div className="m-4 ">
