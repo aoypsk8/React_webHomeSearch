@@ -10,6 +10,7 @@ import { messaging } from "./components/config/firebase";
 import HomeDetail from "./components/details/homeDetail";
 import Search from "./components/pages/search";
 import Detail from "./components/details/detail";
+import Purchase from "./components/pages/purchase";
 // import UserRoute from "./components/routes/UserRoute";
 function App() {
   async function requestPermission() {
@@ -42,6 +43,7 @@ function App() {
 
         <Route exact path="/search" element={<Search />} />
         <Route exact path="/detail" element={<Detail />} />
+        <Route exact path="/purchase" element={<Purchase />} />
         {/* <Route
           path="/"
           element={

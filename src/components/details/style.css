@@ -21,7 +21,17 @@
   left: 45%;
   background-color: #fff;
 }
-
+.flot-box2::before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  transform: rotate(45deg);
+  position: absolute;
+  border: 2px solid #00b8d1;
+  top: 35%;
+  left: -5%;
+  background-color: #00B8D1;
+}
 .container-slide {
   display: flex;
   max-width: 455px;
