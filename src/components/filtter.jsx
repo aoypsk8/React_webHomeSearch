@@ -11,6 +11,8 @@ import { BASE_URL } from "./config/globalKey";
 import { useDispatch } from "react-redux";
 import { addSearchHome } from "../slice/searchHomeSlice";
 import { Link } from "react-router-dom";
+import distance from "../assets/icons/distance.png"
+import floor from "../assets/icons/floor.png"
 function Filtter() {
   const dispatch = useDispatch();
 
@@ -50,17 +52,17 @@ function Filtter() {
       {/*=============== content in filtter =================*/}
       <div className="w-[100%] h-[290px] mt-5 pt-[16px] bg-white rounded-xl shadow-xl">
         {/*=============== Button ເຮືອນເຊົ່າ && ເຮືອນຂາຍ=================*/}
-        <div className="h-[60px] w-auto mx-[450px]  flex items-center justify-around  rounded-xl  text-white">
+        <div className="h-[60px] w-auto mx-[450px]  flex items-center justify-around  rounded-[10px]  text-white">
           {/* hover:outline hover:outline-buttonColor hover:bg-opacity-5 hover:cursor-pointer */}
-          <div className=" h-[100%] w-[100%] rounded-l-xl flex justify-center items-center outline outline-[#00B8D1] hover:text-buttonColor hover:bg-opacity-0 hover:cursor-pointer bg-[#00B8D1]">
-            <p className="text-lg font-bold ">ເຮືອນເຊົ່າ</p>
+          <div className=" h-full w-full rounded-l-[10px] flex justify-center items-center outline outline-[#00B8D1] hover:text-buttonColor hover:bg-opacity-0 hover:cursor-pointer bg-[#00B8D1]">
+            <p className="text-lg font-semibold ">ເຮືອນເຊົ່າ</p>
           </div>
-          <div className=" h-[100%] w-[100%]  rounded-r-xl flex justify-center items-center outline outline-[#00B8D1] hover:text-buttonColor hover:bg-opacity-0 hover:cursor-pointer bg-[#00B8D1]">
-            <p className="text-lg font-bold ">ເຮືອນຂາຍ</p>
+          <div className=" h-full w-full  rounded-r-[10px] flex justify-center items-center outline outline-[#00B8D1] hover:text-buttonColor hover:bg-opacity-0 hover:cursor-pointer bg-[#00B8D1]">
+            <p className="text-lg font-semibold ">ເຮືອນຂາຍ</p>
           </div>
         </div>
         {/*=============== Search filtter=================*/}
-        <div className="relative flex items-center text-gray-400  col-span-2 w-auto h-[60px] mx-14 mt-[16px]">
+        <div className="relative flex items-center    col-span-2 w-auto h-[60px] mx-14 mt-[16px]">
           <img
             src={search}
             alt="search"
@@ -75,7 +77,7 @@ function Filtter() {
             name="search"
             placeholder="ປ້ອນຊື່ສະຖານທີ່ ຫຼື ຕຳແໜ່ງ"
             aria-label="Search "
-            className="w-full h-[55px] pl-10 font-semibold  border border-gray rounded-[10px] border-gray-500 focus:border-gray focus:outline-none 
+            className="w-full h-[55px] pl-10 font-normal text-lg   border border-[#E0E0E0] rounded-[10px]  focus:border-[#E0E0E0] focus:outline-none 
                "
           />
           {searchValue && searchResults.length > 0 && (
@@ -106,9 +108,9 @@ function Filtter() {
           )}
         </div>
         {/*=============== filtter max min =================*/}
-        <div className="flex items-center text-gray-400  col-span-2 w-auto h-[60px] mx-14 mt-4">
+        <div className="flex items-center   col-span-2 w-auto h-[60px] mx-14 mt-4">
           {/* Min */}
-          <div className="relative flex items-center text-gray-400 col-span-2 w-1/4 h-[60px] ">
+          <div className="relative flex items-center  col-span-2 w-1/4 h-[60px] ">
             <p className="w-5 absolute ml-3 pointer-events-none text-lg font-bold">
               Min
             </p>
@@ -121,12 +123,12 @@ function Filtter() {
               name="search"
               placeholder="ຈຳນວນເງີນ"
               aria-label="Search "
-              className="w-full h-[55px] pl-14 pr-3 font-semibold rounded-[10px] border border-gray focus:border-gray focus:outline-none"
+              className="w-full h-[55px] pl-14 pr-3 font-semibold border border-[#E0E0E0] rounded-[10px]  focus:border-[#E0E0E0] focus:outline-none"
             />
           </div>
           {/* max */}
           <hr className="w-5 border border-gray"></hr>
-          <div className="relative flex items-center text-gray-400  col-span-2 w-1/4 h-[60px]  mr-5 ">
+          <div className="relative flex items-center   col-span-2 w-1/4 h-[60px]  mr-5 ">
             <p className="w-5  absolute ml-3 pointer-events-none text-lg font-bold">
               Max
             </p>
@@ -139,15 +141,19 @@ function Filtter() {
               name="search"
               placeholder="ຈຳນວນເງີນ"
               aria-label="Search "
-              className="w-full h-[55px] pl-14 pr-3 font-semibold rounded-[10px] border border-gray focus:border-gray focus:outline-none"
+              className="w-full h-[55px] pl-14 pr-3 font-semibold rounded-[10px] border border-[#E0E0E0] focus:border-[#E0E0E0] focus:outline-none"
             />
           </div>
-          <select className="col-span-1  h-[55px] rounded-[6px] flex items-center w-1/4 border border-gray outline-none mr-5">
+          <select className="col-span-1  h-[55px] rounded-[6px] flex items-center w-1/4 border border-[#E0E0E0] outline-none mr-5">
             <option className="">ລາຄາ</option>
           </select>
-          <select className="col-span-1  h-[55px] rounded-[6px] flex items-center border border-gray outline-none  w-1/4">
+          <select className="col-span-1  h-[55px] rounded-[6px] flex items-center border border-[#E0E0E0] outline-none  w-1/4">
             <option className="">ລາຄາ</option>
           </select>
+          {/* <div className=" h-12 w-36 px-3 rounded-xl border border-gray flex justify-between items-center">
+            <img src={distance} alt="distance" className="w-4 h-4" />
+            <p className="text-lg">60 ㎡</p>
+          </div> */}
         </div>
         {/*=============== Button =================*/}
         <div className="h-[60px] w-auto mx-[280px]  flex items-center justify-around  rounded-xl mt-5 ">
@@ -164,13 +170,12 @@ function Button({ icon, text }) {
   return (
     <div className="grid-button relative hover:text-white text-gray">
       <img src={icon} alt={text} className=" " />
-      <p className="absolute top-16 text-sm font-bold  ">{text}</p>
+      <p className="absolute top-16 text-sm font-semibold mt-2 ">{text}</p>
     </div>
   );
 }
 
 export default Filtter;
-
 
 const TextComponent = ({ text, maxLength }) => {
   const displayText = text.slice(0, maxLength) + ".....";

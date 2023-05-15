@@ -18,15 +18,39 @@ import "./style.css";
 
 import { motion } from "framer-motion";
 import Footer from "../pages/Footer";
+import { Link, useParams } from "react-router-dom";
+import axios from "axios";
+import { BASE_URL } from "../config/globalKey";
 function Detail() {
+  const { homeId } = useParams();
   const carousel = useRef();
   const [width, setWidth] = useState(0);
+
+  const [detail, setDetail] = useState([]);
+  const [address, setAddress] = useState([]);
+  const [image, setImage] = useState([]);
 
   useEffect(() => {
     setWidth(carousel.current?.scrollWidth - carousel.current?.offsetWidth);
     console.log(carousel.current?.scrollWidth - carousel.current?.offsetWidth);
   }, []);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    const fetchHome = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/home/getOne/${homeId}`);
+        setDetail(response.data.data);
+        setAddress(response.data.data.addressId);
+        console.log(response.data.data);
+        setImage(response.data.data.image);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchHome();
+  }, [homeId]);
+  console.log(image[0]);
   return (
     <div className="font-Noto h-auto">
       <Navbar />
@@ -61,30 +85,52 @@ function Detail() {
       </div>
       {/* path */}
       <div className="flex mt-3 px-40 w-full items-center">
-        <p className="text-lg font-semibold">ໜ້າຫຼັກ</p>
-        <img src={path} alt="path" className="w-3 h-4 ml-3" />
-        <p className="text-lg font-semibold ml-3">ເຮືອນ</p>
-        <img src={path} alt="path" className="w-3 h-4 ml-3" />
-        <p className="text-lg font-semibold ml-3">ເຮືອນເຊົ່າ</p>
-        <img src={path} alt="path" className="w-3 h-4 ml-3" />
-        <p className="text-lg font-semibold ml-3">
+        <Link to={"/"} style={{ textDecoration: "none" }} className="text-lg font-medium text-[#000000]">ໜ້າຫຼັກ</Link>
+        <img src={path} alt="path" className="w-2 h-3 mx-3" />
+        <Link to={"/search"} style={{ textDecoration: "none" }} className="text-lg font-medium text-[#000000]">ຄົ້ນຫາ</Link>
+        {/* <img src={path} alt="path" className="w-2 h-3 mx-3" />
+        <p className="text-lg font-medium text-[#000000]">ເຮືອນເຊົ່າ</p> */}
+        <img src={path} alt="path" className="w-2 h-3 mx-3" />
+        <p className="text-lg font-medium text-[#000000]">
           ເຮືອນ 2 ຊັ້ນໃຫ້ເຊົ່າ ແຄມທາງ ເຂດດົງໂດກ ໃກ້ກັບມະຫາ ວິທະຍາໄລແຫ່ງຊາດ
         </p>
       </div>
 
       {/* Image  */}
       <div className="w-full h-[360px] px-40 mt-4 flex ">
-        <div className="w-2/5 h-full bg-[#00B8D1] rounded-l-xl"></div>
+        <div className="w-2/5 h-full bg-[#00B8D1] rounded-l-xl">
+          <img src={image[0]} alt="" className="w-full h-full  rounded-l-xl" />
+        </div>
         <div className="w-3/5 h-full  ml-2 ">
           <div className="w-full  h-1/2 flex pb-1">
-            <div className="w-1/3 bg-[#00B8D1] h-full mr-1"></div>
-            <div className="w-1/3 bg-[#00B8D1] h-full mx-1"></div>
-            <div className="w-1/3 bg-[#00B8D1] h-full ml-1 rounded-tr-xl"></div>
+            <div className="w-1/3 bg-[#00B8D1] h-full mr-1">
+              <img src={image[1]} alt="" className="w-full h-full" />
+            </div>
+            <div className="w-1/3 bg-[#00B8D1] h-full mx-1">
+              <img src={image[2]} alt="" className="w-full h-full" />
+            </div>
+            <div className="w-1/3 bg-[#00B8D1] h-full ml-1 rounded-tr-xl">
+              <img
+                src={image[3]}
+                alt=""
+                className="w-full h-full rounded-tr-xl"
+              />
+            </div>
           </div>
           <div className="w-full  h-1/2 flex pt-1 ">
-            <div className="w-1/3 bg-[#00B8D1] h-full mr-1"></div>
-            <div className="w-1/3 bg-[#00B8D1] h-full mx-1"></div>
-            <div className="w-1/3 bg-[#00B8D1] h-full ml-1 rounded-br-xl"></div>
+            <div className="w-1/3 bg-[#00B8D1] h-full mr-1">
+              <img src={image[4]} alt="" className="w-full h-full " />
+            </div>
+            <div className="w-1/3 bg-[#00B8D1] h-full mx-1">
+              <img src={image[5]} alt="" className="w-full h-full " />
+            </div>
+            <div className="w-1/3 bg-[#00B8D1] h-full ml-1 rounded-br-xl">
+              <img
+                src={image[6]}
+                alt=""
+                className="w-full h-full rounded-br-xl"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -92,20 +138,19 @@ function Detail() {
       <div className="h-[260px] w-full px-40 flex mt-4">
         <div className="w-7/12 h-full border border-[#E0E0E0] rounded-xl shadow-md p-4 flex flex-col justify-between">
           <div>
-            <p className="text-2xl font-bold ">
+            <p className="text-xl  font-semibold ">
               ເຮືອນ 2 ຊັ້ນໃຫ້ເຊົ່າ ແຄມທາງ ເຂດດົງໂດກ ໃກ້ກັບມະຫາວິທະຍາໄລແຫ່ງຊາດ
             </p>
             <div className="flex mt-3 items-center">
-              <img src={location} alt="location" className="w-3 h-4 mr-1" />
-              <p className="text-base font-semibold ">
-                ດົງໂດກ, ໄຊທານີ, ນະຄອນຫຼວງ
-              </p>
+              <img
+                src={location}
+                alt="location"
+                className="w-[10px] h-[13px] mr-1"
+              />
+              <p className="text-sm font-normal ">ດົງໂດກ, ໄຊທານີ, ນະຄອນຫຼວງ</p>
             </div>
-            <p className="font-normal text-base text-[#000] mt-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-              vulputate libero et velit interdum, ac aliquet odio mattis. Class
-              aptent taciti sociosqu ad litora torquent per conubia nostra, per
-              inceptos himenaeos
+            <p className="font-normal text-sm text-[#000] mt-4">
+              {detail.description}
             </p>
           </div>
 
@@ -124,14 +169,18 @@ function Detail() {
         <div className="w-5/12 h-full ml-5 border border-[#E0E0E0] rounded-xl shadow-md p-4 flex flex-col justify-between">
           <div className="w-full h-auto flex">
             <div className="relative flex items-center">
-              <img src={Rectangle} alt="Rectangle" className="w-12 h-12" />
-              <p className="absolute left-2 font-extrabold text-[#fff] text-xl">
+              <img
+                src={Rectangle}
+                alt="Rectangle"
+                className="w-[43px] h-[43px]"
+              />
+              <p className="absolute left-2  text-[#fff] text-xl font-semibold">
                 4.6
               </p>
             </div>
             <div className="ml-2">
-              <p className="text-2xl font-bold">Wonderful</p>
-              <p className="text-sm text-[#000]">349 reviews</p>
+              <p className="text-xl font-semibold">Wonderful</p>
+              <p className="text-xs text-[#000]">349 reviews</p>
             </div>
           </div>
           <div className=" w-full h-[160px] container-slide ">
@@ -159,10 +208,10 @@ function Detail() {
                     <div className="w-full h-[30%] rounded-b-xl flex justify-between items-center p-4">
                       <div className="flex items-center">
                         <img src={flat} alt="flat" />
-                        <p className="ml-4">Adam levi</p>
+                        <p className="ml-4 text-xs font-medium">Adam levi</p>
                       </div>
                       <div className="w-6 h-6 rounded-full bg-[#00B8D1] flex justify-center items-center">
-                        4
+                        <p className="text-sm font-medium text-[#fff]">4</p>
                       </div>
                     </div>
                   </div>
@@ -196,46 +245,46 @@ function Detail() {
       <div className="w-full h-[230px] px-40 flex mt-4">
         {/* ສິ່ງອຳນວຍຄວາມສະດວກ */}
         <div className="h-full w-1/3  mr-1 border border-[#E0E0E0] rounded-xl p-4">
-          <p className="text-2xl font-bold">ສິ່ງອຳນວຍຄວາມສະດວກ</p>
+          <p className="text-xl font-semibold">ສິ່ງອຳນວຍຄວາມສະດວກ</p>
           <div className="flex mt-6">
             <div>
               <div className="flex items-center ">
-                <img src={poor} alt="poot" className="w-5" />
-                <p className=" text-lg ml-2">ສະລອຍນ້ຳ</p>
+                <img src={poor} alt="poot" className="w-[25px] h-[17px]" />
+                <p className=" text-base font-normal ml-2">ສະລອຍນ້ຳ</p>
               </div>
               <div className="flex  items-center mt-2">
-                <img src={air} alt="poot" className="w-5" />
-                <p className="text-lg ml-2">ແອ 2 ເຄື່ອງ</p>
+                <img src={air} alt="poot" className="w-[25px] h-[17px]" />
+                <p className="text-base font-normal ml-2">ແອ 2 ເຄື່ອງ</p>
               </div>
               <div className="flex  items-center mt-2">
-                <img src={fish} alt="poot" className="w-5" />
-                <p className="text-lg ml-2">ອ່າງລ້ຽງປາ</p>
+                <img src={fish} alt="poot" className="w-[25px] h-[17px]" />
+                <p className="text-base font-normal ml-2">ອ່າງລ້ຽງປາ</p>
               </div>
               <div className="flex  items-center mt-2">
-                <img src={fan} alt="poot" className="w-5" />
-                <p className="text-lg ml-2">ພັດລົດຕິດເພດານ</p>
+                <img src={fan} alt="poot" className="w-[25px] h-[17px]" />
+                <p className="text-base font-normal ml-2">ພັດລົດຕິດເພດານ</p>
               </div>
             </div>
             <div className="ml-16">
               <div className="flex  items-center">
-                <img src={poor} alt="poot" className="w-5" />
-                <p className="text-lg  ml-2">ສວນດອກໄມ້</p>
+                <img src={poor} alt="poot" className="w-[25px] h-[17px]" />
+                <p className="text-base font-normal  ml-2">ສວນດອກໄມ້</p>
               </div>
               <div className="flex  items-center mt-2">
-                <img src={garage} alt="poot" className="w-5" />
-                <p className="text-lg ml-2">ໂຮງຈອດລົດ</p>
+                <img src={garage} alt="poot" className="w-[25px] h-[17px]" />
+                <p className="text-base font-normal ml-2">ໂຮງຈອດລົດ</p>
               </div>
               <div className="flex items-center mt-2">
-                <img src={camera} alt="poot" className="w-5" />
-                <p className="text-lg ml-2">ກ້ອງວົງຈອນປິດ</p>
+                <img src={camera} alt="poot" className="w-[25px] h-[17px]" />
+                <p className="text-base font-normal ml-2">ກ້ອງວົງຈອນປິດ</p>
               </div>
             </div>
           </div>
         </div>
         <div className="h-full w-2/3  ml-1 flex  border border-[#E0E0E0] rounded-xl">
           <div className="h-full w-2/5 p-4">
-            <p className="text-2xl font-bold">ທີ່ດິນ</p>
-            <p className="mt-6 text-base font-medium">
+            <p className="text-xl font-semibold">ທີ່ດິນ</p>
+            <p className="mt-6 text-base font-normal">
               ເນື້ອທີ່ທັ້ງໝົດ 60 ㎡ ແລະ ຕິດໜ້າທາງ 8 m
             </p>
             {/* line */}
@@ -244,12 +293,14 @@ function Detail() {
             </div>
             <div className="flex  items-center mt-4">
               <img src={car} alt="car" />
-              <p className="ml-2 text-base font-medium">
+              <p className="ml-2 text-base font-normal">
                 ຂັບລົດຈາກຕົວເມືອງ 15 ນາທີ
               </p>
             </div>
           </div>
-          <div className="bg-logoColor h-full w-3/5"></div>
+          <div className=" h-full w-3/5 flex justify-center items-center">
+            <p className="text-2xl font-medium">ພື້ນທີ່ສຳຫລັບໂຄສະນາ</p>
+          </div>
         </div>
       </div>
       {/* table detail price */}
@@ -260,28 +311,28 @@ function Detail() {
             <div className="w-[230px] h-[70px]  flex justify-center items-center border-2 border-[#00B8D1] relative">
               <div className="absolute w-full h-full bg-[#fff] z-10"></div>
               <div className=" flot-box z-0"></div>
-              <p className="text-2xl font-bold text-[#00B8D1] z-50">
+              <p className="text-2xl font-semibold text-[#00B8D1] z-50">
                 ແພັກເລີ່ມຕົ້ນ
               </p>
             </div>
             <div className="w-[230px] h-[70px] ml-4  flex justify-center items-center border-2 border-[#00B8D1] relative">
               <div className="absolute w-full h-full bg-[#fff] z-10"></div>
               <div className=" flot-box z-0"></div>
-              <p className="text-2xl font-bold text-[#00B8D1] z-50">
+              <p className="text-2xl font-semibold text-[#00B8D1] z-50">
                 ຈ່າຍກ່ອນ 3 ເດືອນ
               </p>
             </div>
             <div className="w-[230px] h-[70px] ml-4  flex justify-center items-center border-2 border-[#00B8D1] relative">
               <div className="absolute w-full h-full bg-[#fff] z-10"></div>
               <div className=" flot-box z-0"></div>
-              <p className="text-2xl font-bold text-[#00B8D1] z-50">
+              <p className="text-2xl font-semibold text-[#00B8D1] z-50">
                 ຈ່າຍກ່ອນ 6 ເດືອນ
               </p>
             </div>
             <div className="w-[230px] h-[70px] ml-4  flex justify-center items-center border-2 border-[#00B8D1] relative">
               <div className="absolute w-full h-full bg-[#fff] z-10"></div>
               <div className=" flot-box z-0"></div>
-              <p className="text-2xl font-bold text-[#00B8D1] z-50">
+              <p className="text-2xl font-semibold text-[#00B8D1] z-50">
                 ຈ່າຍກ່ອນ 1 ປີ
               </p>
             </div>
@@ -291,107 +342,108 @@ function Detail() {
             {/* 1 table */}
             <div className="w-full h-1/6 flex items-center ">
               <div className="w-[180px] h-full items-center flex pl-10 ">
-                <p className="text-xl font-bold">ຄ່າເຊົ່າ</p>
+                <p className="text-xl font-semibold">ຄ່າເຊົ່າ</p>
               </div>
               <div className="w-[1px] h-full border border-[#E0E0E0]"></div>
               <div className="w-[180px] h-full items-center flex justify-center pl-10 mr-12">
-                <p className="text-lg font-medium">₭ 1,500,000/ເດືອນ</p>
+                <p className="text-base font-normal">₭ 1,500,000/ເດືອນ</p>
               </div>
               <div className="w-[1px] h-full border border-[#E0E0E0] mr-2"></div>
               <div className="w-[1px] h-full border border-[#E0E0E0] ml-2"></div>
 
               <div className="w-[180px] h-full items-center flex justify-center pl-10 mr-12">
-                <p className="text-lg font-medium">₭ 1,425,000/ເດືອນ</p>
+                <p className="text-base font-normal">₭ 1,425,000/ເດືອນ</p>
               </div>
               <div className="w-[1px] h-full border border-[#E0E0E0] mr-2"></div>
               <div className="w-[1px] h-full border border-[#E0E0E0] ml-2"></div>
               <div className="w-[180px] h-full items-center flex justify-center pl-10 mr-12">
-                <p className="text-lg font-medium">₭ 1,350,000/ເດືອນ</p>
+                <p className="text-base font-normal">₭ 1,350,000/ເດືອນ</p>
               </div>
               <div className="w-[1px] h-full border border-[#E0E0E0] mr-2"></div>
               <div className="w-[1px] h-full border border-[#E0E0E0] ml-2"></div>
               <div className="w-[180px] h-full items-center flex justify-center pl-10 mr-12">
-                <p className="text-lg font-medium">₭ 1,275,000/ເດືອນ</p>
+                <p className="text-base font-normal">₭ 1,275,000/ເດືອນ</p>
               </div>
               <div className="w-[1px] h-full border border-[#E0E0E0]"></div>
             </div>
             {/* 2 table */}
             <div className="w-full h-1/6 bg-[#00B8D1] bg-opacity-[8%] flex items-center">
               <div className="w-[180px] h-full items-center flex pl-10 ">
-                <p className="text-xl font-bold">ຄ່າມັດຈຳ</p>
+                <p className="text-xl font-semibold">ຄ່າມັດຈຳ</p>
               </div>
               <div className="w-[1px] h-full border border-[#E0E0E0]"></div>
               <div className="w-[180px] h-full items-center flex justify-center pl-10 mr-12">
-                <p className="text-lg font-medium">₭ 500,000</p>
+                <p className="text-base font-normal">₭ 500,000</p>
               </div>
               <div className="w-[1px] h-full border border-[#E0E0E0] mr-2"></div>
               <div className="w-[1px] h-full border border-[#E0E0E0] ml-2"></div>
 
               <div className="w-[180px] h-full items-center flex justify-center pl-10 mr-12">
-                <p className="text-lg font-medium"> - </p>
+                <p className="text-base font-normal"> - </p>
               </div>
               <div className="w-[1px] h-full border border-[#E0E0E0] mr-2"></div>
               <div className="w-[1px] h-full border border-[#E0E0E0] ml-2"></div>
               <div className="w-[180px] h-full items-center flex justify-center pl-10 mr-12">
-                <p className="text-lg font-medium"> - </p>
+                <p className="text-base font-normal"> - </p>
               </div>
               <div className="w-[1px] h-full border border-[#E0E0E0] mr-2"></div>
               <div className="w-[1px] h-full border border-[#E0E0E0] ml-2"></div>
               <div className="w-[180px] h-full items-center flex justify-center pl-10 mr-12">
-                <p className="text-lg font-medium"> - </p>
+                <p className="text-base font-normal"> - </p>
               </div>
               <div className="w-[1px] h-full border border-[#E0E0E0]"></div>
             </div>
             {/* 3 table */}
             <div className="w-full h-1/6 flex items-center">
-              <p className="w-[180px] h-full items-center flex pl-10 text-xl font-bold">
-                ຄ່າຂີ້ເຫຍື່ອ
-              </p>
-              <div className="w-[1px] h-full border border-[#E0E0E0]"></div>
-              <p className="w-[180px] h-full items-center flex ml-12 text-lg font-medium">
-                ₭ 50,000/ເດືອນ
-              </p>
-              <div className="w-[1px] h-full border border-[#E0E0E0] mr-2"></div>
-              <div className="w-[1px] h-full border border-[#E0E0E0] ml-2"></div>
-              <p className="w-[180px] h-full items-center flex ml-12 ">
-                ₭ 50,000/ເດືອນ
-              </p>
-              <div className="w-[1px] h-full border border-[#E0E0E0] mr-2"></div>
-              <div className="w-[1px] h-full border border-[#E0E0E0] ml-2"></div>
-              <p className="w-[180px] h-full items-center flex ml-12 ">
-                ₭ 50,000/ເດືອນ
-              </p>
-              <div className="w-[1px] h-full border border-[#E0E0E0] mr-2"></div>
-              <div className="w-[1px] h-full border border-[#E0E0E0] ml-2"></div>
-              <p className="w-[180px] h-full items-center flex ml-12 ">
-                ₭ 50,000/ເດືອນ
-              </p>
-              <div className="w-[1px] h-full border border-[#E0E0E0]"></div>
-            </div>
-            {/* 2 table */}
-            <div className="w-full h-1/6 bg-[#00B8D1] bg-opacity-[8%] flex items-center ">
               <div className="w-[180px] h-full items-center flex pl-10 ">
-                <p className="text-xl font-bold">ສ່ວນຫຼຸດ</p>
+                <p className="text-xl font-semibold">ຄ່າຂີ້ເຫຍື່ອ</p>
               </div>
               <div className="w-[1px] h-full border border-[#E0E0E0]"></div>
               <div className="w-[180px] h-full items-center flex justify-center pl-10 mr-12">
-                <p className="text-lg font-medium">-</p>
+                <p className="text-base font-normal">₭ 50,000/ເດືອນ</p>
               </div>
               <div className="w-[1px] h-full border border-[#E0E0E0] mr-2"></div>
               <div className="w-[1px] h-full border border-[#E0E0E0] ml-2"></div>
 
               <div className="w-[180px] h-full items-center flex justify-center pl-10 mr-12">
-                <p className="text-lg font-medium">5 %</p>
+                <p className="text-base font-normal">₭ 50,000/ເດືອນ</p>
               </div>
               <div className="w-[1px] h-full border border-[#E0E0E0] mr-2"></div>
               <div className="w-[1px] h-full border border-[#E0E0E0] ml-2"></div>
               <div className="w-[180px] h-full items-center flex justify-center pl-10 mr-12">
-                <p className="text-lg font-medium">10 %</p>
+                <p className="text-base font-normal">₭ 50,000/ເດືອນ</p>
               </div>
               <div className="w-[1px] h-full border border-[#E0E0E0] mr-2"></div>
               <div className="w-[1px] h-full border border-[#E0E0E0] ml-2"></div>
               <div className="w-[180px] h-full items-center flex justify-center pl-10 mr-12">
-                <p className="text-lg font-medium">15%</p>
+                <p className="text-base font-normal">₭ 50,000/ເດືອນ</p>
+              </div>
+              <div className="w-[1px] h-full border border-[#E0E0E0]"></div>
+            </div>
+            {/* 4 table */}
+            <div className="w-full h-1/6 bg-[#00B8D1] bg-opacity-[8%] flex items-center ">
+              <div className="w-[180px] h-full items-center flex pl-10 ">
+                <p className="text-xl font-semibold">ສ່ວນຫຼຸດ</p>
+              </div>
+              <div className="w-[1px] h-full border border-[#E0E0E0]"></div>
+              <div className="w-[180px] h-full items-center flex justify-center pl-10 mr-12">
+                <p className="text-base font-normal">-</p>
+              </div>
+              <div className="w-[1px] h-full border border-[#E0E0E0] mr-2"></div>
+              <div className="w-[1px] h-full border border-[#E0E0E0] ml-2"></div>
+
+              <div className="w-[180px] h-full items-center flex justify-center pl-10 mr-12">
+                <p className="text-base font-normal">5 %</p>
+              </div>
+              <div className="w-[1px] h-full border border-[#E0E0E0] mr-2"></div>
+              <div className="w-[1px] h-full border border-[#E0E0E0] ml-2"></div>
+              <div className="w-[180px] h-full items-center flex justify-center pl-10 mr-12">
+                <p className="text-base font-normal">10 %</p>
+              </div>
+              <div className="w-[1px] h-full border border-[#E0E0E0] mr-2"></div>
+              <div className="w-[1px] h-full border border-[#E0E0E0] ml-2"></div>
+              <div className="w-[180px] h-full items-center flex justify-center pl-10 mr-12">
+                <p className="text-base font-normal">15%</p>
               </div>
               <div className="w-[1px] h-full border border-[#E0E0E0]"></div>
             </div>
@@ -416,7 +468,7 @@ function Detail() {
       {/* ລາຍລະອຽດທີ່ພັກ */}
       <div className="w-full h-[720px] px-40 mt-4">
         <div className="w-full h-full border border-[#E0E0E0] rounded-xl p-4">
-          <p className="text-2xl font-bold ">ລາຍລະອຽດທີ່ພັກ</p>
+          <p className="text-xl font-semibold ">ລາຍລະອຽດທີ່ພັກ</p>
           {/* floor 1 */}
           <div className="mt-6 w-full h-[185px] flex">
             <div className="w-[150px] h-full bg-[#00B8D1] rounded-md flex flex-col justify-center items-center">

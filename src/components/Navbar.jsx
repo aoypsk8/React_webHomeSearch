@@ -32,7 +32,7 @@ export default function Navbar() {
     });
   };
   return (
-    <div className="flex items-center px-40 h-20  py-2 justify-between bg-white font-Noto">
+    <div className="flex items-center px-40 h-[60px]  py-2 justify-between bg-white font-Noto">
       {/* logo and menu */}
       <div className="flex items-center h-[100%]">
         {/* logo */}
@@ -40,9 +40,9 @@ export default function Navbar() {
           <img
             src={logo}
             alt="logo"
-            className="h-[55px] w-[45px] hover:cursor-pointer"
+            className="h-[41px] w-[33px] hover:cursor-pointer"
           />
-          <p className="text-logoColor ml-5 text-xl hover:cursor-pointer font-bold">
+          <p className="text-logoColor ml-5 text-2xl hover:cursor-pointer font-bold">
             Home Search
           </p>
         </div>
@@ -60,7 +60,7 @@ export default function Navbar() {
         <div className="flex items-center mr-12 ">
           <Link className="button-style mx-6 text-white" onClick={handleLogout}>
             <div className="menu-button flex">
-              <p className="text-lg">ອອກຈາກລະບົບ</p>
+              <p className="text-base">ອອກຈາກລະບົບ</p>
             </div>
           </Link>
         </div>
@@ -69,12 +69,12 @@ export default function Navbar() {
         <div className="flex items-center  ">
           <Link to={"/register"} className="button-style mx-6 text-white">
             <div className="menu-button flex">
-              <p className="text-lg  ">ສ້າງບັນຊີໃໝ່</p>
+              <p className="text-base ">ສ້າງບັນຊີໃໝ່</p>
             </div>
           </Link>
           <Link to={"/login"} className="button-style  text-white">
             <div className="menu-button flex">
-              <p className="text-lg">ເຂົ້າສູ່ລະບົບ</p>
+              <p className="text-base">ເຂົ້າສູ່ລະບົບ</p>
             </div>
           </Link>
         </div>

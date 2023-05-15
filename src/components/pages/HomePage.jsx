@@ -78,12 +78,12 @@ function HomePage() {
         <img
           src={banner}
           alt="banner"
-          className=" h-[386px] w-[1540px] object-cover z-10"
+          className=" h-[459px] w-[1540px] object-cover z-10"
         />
         {/*=============== Filtter =================*/}
         <Filtter />
         {/* =============== ຂໍ້ສະເຫນີພິເສດ ================= */}
-        <p className="text-xl text-[#575757] pt-28 font-bold mt-44 mx-40">
+        <p className="text-xl text-[#575757] pt-28 font-semibold mt-28 mx-40">
           ຂໍສະເໜີພິເສດ
         </p>
         <div className="mx-40 mt-4  ">
@@ -146,50 +146,64 @@ function HomePage() {
           </div>
         </div>
         {/* =============== ສະຖານທີ່ຍອດນິຍົມ ================= */}
-        <div className="mt-20 flex justify-center">
-          <p className="text-2xl text-[#575757] font-bold ">ສະຖານທີ່ຍອດນິຍົມ</p>
+        <div className="mt-24 flex justify-center">
+          <p className="text-2xl text-[#575757] font-semibold ">
+            ສະຖານທີ່ຍອດນິຍົມ
+          </p>
         </div>
-        <div className="h-[200px]  mx-40 mt-6 flex justify-around ">
+        <div className="h-[200px]  mx-40 mt-8 flex justify-around ">
           <div className="h-[140px] w-[140px] bg-logoColor rounded-full flex justify-center items-center relative">
             <div className=" items-center absolute top-[105%]">
-              <p className=" font-bold text-base mx-10">ດົງໂດກ</p>
+              <p className=" font-semibold text-[#575757] text-lg mx-10">
+                ດົງໂດກ
+              </p>
               <p className=" text-[#575757] text-base ">ໄຊທານີ, ນະຄອນຫຼວງ</p>
             </div>
           </div>
           <div className="h-[140px] w-[140px] bg-logoColor rounded-full flex justify-center items-center relative">
             <div className=" items-center absolute top-[105%]">
-              <p className=" font-bold text-base mx-10">ດົງໂດກ</p>
+              <p className=" font-semibold text-[#575757] text-lg mx-10">
+                ດົງໂດກ
+              </p>
               <p className=" text-[#575757] text-base ">ໄຊທານີ, ນະຄອນຫຼວງ</p>
             </div>
           </div>
           <div className="h-[140px] w-[140px] bg-logoColor rounded-full flex justify-center items-center relative">
             <div className=" items-center absolute top-[105%]">
-              <p className=" font-bold text-base mx-10">ດົງໂດກ</p>
+              <p className=" font-semibold text-[#575757] text-lg mx-10">
+                ດົງໂດກ
+              </p>
               <p className=" text-[#575757] text-base ">ໄຊທານີ, ນະຄອນຫຼວງ</p>
             </div>
           </div>
           <div className="h-[140px] w-[140px] bg-logoColor rounded-full flex justify-center items-center relative">
             <div className=" items-center absolute top-[105%]">
-              <p className=" font-bold text-base mx-10">ດົງໂດກ</p>
+              <p className=" font-semibold text-[#575757] text-lg mx-10">
+                ດົງໂດກ
+              </p>
               <p className=" text-[#575757] text-base ">ໄຊທານີ, ນະຄອນຫຼວງ</p>
             </div>
           </div>
           <div className="h-[140px] w-[140px] bg-logoColor rounded-full flex justify-center items-center relative">
             <div className=" items-center absolute top-[105%]">
-              <p className=" font-bold text-base mx-10">ດົງໂດກ</p>
+              <p className=" font-semibold text-[#575757] text-lg mx-10">
+                ດົງໂດກ
+              </p>
               <p className=" text-[#575757] text-base ">ໄຊທານີ, ນະຄອນຫຼວງ</p>
             </div>
           </div>
           <div className="h-[140px] w-[140px] bg-logoColor rounded-full flex justify-center items-center relative">
             <div className=" items-center absolute top-[105%]">
-              <p className=" font-bold text-base mx-10">ດົງໂດກ</p>
+              <p className=" font-semibold text-[#575757] text-lg mx-10">
+                ດົງໂດກ
+              </p>
               <p className=" text-[#575757] text-base ">ໄຊທານີ, ນະຄອນຫຼວງ</p>
             </div>
           </div>
         </div>
         {/* =============== ສຳຫຼວດທີ່ຢູ່ອາໄສ ================= */}
         <div className="mt-16 flex justify-center">
-          <p className="text-2xl text-[#575757] font-bold ">ສຳຫຼວດທີ່ຢູ່ອາໄສ</p>
+          <p className="text-2xl text-[#575757] font-semibold">ສຳຫຼວດທີ່ຢູ່ອາໄສ</p>
         </div>
         <div className="h-[240px]  mx-40 mt-6 flex justify-evenly">
           <div className=" w-[250px] h-[240px] border border-[#E0E0E0] shadow-sm">
@@ -203,7 +217,7 @@ function HomePage() {
             <div className="w-full h-[160px] bg-logoColor"></div>
             <div className="m-4">
               <p className="text-sm font-bold">ເຮືອນ</p>
-              <p className="text-xs text-[#575757]">2,450 ແຫ່ງ</p>
+              <p className="text-xs text-[#575757]">2,45x0 ແຫ່ງ</p>
             </div>
           </div>
           <div className=" w-[250px] h-[240px] border border-[#E0E0E0] shadow-sm">

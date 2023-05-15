@@ -42,7 +42,7 @@ function App() {
         {/* <Route exact path="/home/:homeId" element={<HomeDetail />} /> */}
 
         <Route exact path="/search" element={<Search />} />
-        <Route exact path="/detail" element={<Detail />} />
+        <Route exact path="/detail/:homeId" element={<Detail />} />
         <Route exact path="/purchase" element={<Purchase />} />
         {/* <Route
           path="/"
