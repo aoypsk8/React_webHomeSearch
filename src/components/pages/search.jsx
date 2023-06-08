@@ -5,7 +5,6 @@ import Footer from "./Footer";
 import search from "../../assets/icons/search.png";
 import distance from "../../assets/icons/distance.png";
 import floor from "../../assets/icons/floor.png";
-import location from "../../assets/icons/location.png";
 import kip from "../../assets/icons/kip.png";
 import ArrowLeft from "../../assets/icons/ArrowLeft.png";
 import ArrowRight from "../../assets/icons/ArrowRight.png";
@@ -50,7 +49,7 @@ function Search() {
     if (searchHome) {
       setHome(searchHome);
     }
-  }, []);
+  }, [searchHome]);
   console.log(home);
 
   const [handleLeft, setIsHandleLeft] = useState(true);
@@ -90,7 +89,7 @@ function Search() {
               {searchResults.map((item) => {
                 return (
                   <Link
-                    to={`/`}
+                    to={`/search`}
                     style={{ textDecoration: "none" }}
                     key={item._id}
                     onClick={() => window.location.reload()}

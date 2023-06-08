@@ -6,11 +6,7 @@ import { Link } from "react-router-dom";
 function CardSearch(props) {
   const { data } = props;
   return (
-    <Link
-      to={`/detail/${data._id}`}
-      style={{ textDecoration: "none" }}
-      className="border border-[#E0E0E0] w-full h-[270px] rounded-lg mt-5 flex"
-    >
+    <div className="border border-[#E0E0E0] w-full h-[270px] rounded-lg mt-5 flex">
       {/* ==============left============== */}
       <div className="w-3/12 h-full p-3">
         <div className="h-[180px] w-full bg-[#00B8D1] rounded-t-lg">
@@ -48,9 +44,7 @@ function CardSearch(props) {
       <div className="w-6/12 h-full p-3 ">
         <div>
           {/*  */}
-          <p className="text-base font-semibold">
-            ເຮືອນ 2 ຊັ້ນໃຫ້ເຊົ່າ ແຄມທາງ ເຂດດົງໂດກ ໃກ້ກັບມະຫາ ວິທະຍາໄລແຫ່ງຊາດ
-          </p>
+          <p className="text-base font-semibold">{data.title}</p>
           {/*  */}
           <div className="flex items-center mt-2">
             <img
@@ -111,7 +105,7 @@ function CardSearch(props) {
             <img src={distance} alt="distance" className="w-4 h-4" />
             <p className="text-sm">60 ㎡</p>
           </div>
-          <div className="ml-1 h-10 w-28 rounded-xl border border-[#E0E0E0] flex justify-evenly items-center ml-1">
+          <div className=" h-10 w-28 rounded-xl border border-[#E0E0E0] flex justify-evenly items-center ml-1">
             <img src={floor} alt="distance" className="w-4 h-4" />
             <p className="text-sm">2 ຊັ້ນ</p>
           </div>
@@ -129,13 +123,17 @@ function CardSearch(props) {
           </div>
         </div>
         {/* button */}
-        <Link to={`/detail`} className=" w-full h-10 absolute bottom-3 px-3">
+        <Link
+          to={`/detail/${data._id}`}
+          style={{ textDecoration: "none" }}
+          className=" w-full h-10 absolute bottom-3 px-3"
+        >
           <div className="bg-[#00B8D1] w-full h-full rounded-lg flex justify-center items-center">
             <p className="text-[#fff] text-xl font-medium ">ຢ້ຽມຊົມ</p>
           </div>
         </Link>
       </div>
-    </Link>
+    </div>
   );
 }
 

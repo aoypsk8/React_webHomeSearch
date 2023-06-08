@@ -7,7 +7,7 @@ import HomePage from "./components/pages/HomePage";
 import { useEffect } from "react";
 import { getToken } from "firebase/messaging";
 import { messaging } from "./components/config/firebase";
-import HomeDetail from "./components/details/homeDetail";
+// import HomeDetail from "./components/details/homeDetail";
 import Search from "./components/pages/search";
 import Detail from "./components/details/detail";
 import Purchase from "./components/pages/purchase";

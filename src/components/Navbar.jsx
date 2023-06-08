@@ -34,7 +34,7 @@ export default function Navbar() {
   return (
     <div className="flex items-center px-40 h-[60px]  py-2 justify-between bg-white font-Noto">
       {/* logo and menu */}
-      <div className="flex items-center h-[100%]">
+      <Link to={"/"} className="flex items-center h-[100%]">
         {/* logo */}
         <div className="flex items-center">
           <img
@@ -48,12 +48,12 @@ export default function Navbar() {
         </div>
         {/* menu */}
         <ul className="flex items-center list-none mx-32 h-[100%]">
-          <li className="text-style ">ໜ້າຫຼັກ</li>
+          <Link to={"/"} className="text-style ">ໜ້າຫຼັກ</Link>
           <li className="mx-14 text-style ">ເຂົ້າຮ່ວມກັບເຮົາ</li>
           <li className="text-style ">ຊ່ວຍເຫຼືອ</li>
           <li className="ml-14 text-style ">ກ່ຽວກັບເຮົາ</li>
         </ul>
-      </div>
+      </Link>
 
       {/* buttons */}
       {tokenLoca && (

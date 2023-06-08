@@ -7,32 +7,77 @@ import distance from "../../assets/icons/distance.png";
 import Rectangle from "../../assets/icons/Rectangle.png";
 import floor from "../../assets/icons/floor.png";
 import flat from "../../assets/icons/flat.png";
-import poor from "../../assets/icons/poor.png";
-import air from "../../assets/icons/air.png";
-import fish from "../../assets/icons/fish.png";
-import fan from "../../assets/icons/fan.png";
-import garage from "../../assets/icons/garage.png";
-import car from "../../assets/icons/car.png";
-import camera from "../../assets/icons/camera.png";
 import "./style.css";
-
+import Swal from "sweetalert2";
 import { motion } from "framer-motion";
 import Footer from "../pages/Footer";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { BASE_URL } from "../config/globalKey";
+
+import Modal from "react-modal";
 function Detail() {
   const { homeId } = useParams();
+
   const carousel = useRef();
   const [width, setWidth] = useState(0);
+  const navigate = useNavigate();
 
   const [detail, setDetail] = useState([]);
-  const [address, setAddress] = useState([]);
   const [image, setImage] = useState([]);
+
+  // Api and token =============================to sedding data
+  const token = localStorage.getItem("token");
+  const Api = axios.create({
+    baseURL: BASE_URL,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const [value, setValue] = useState({
+    userName: "aoyy",
+    phoneNumber: "78844081",
+    appointment: "2023/10/23",
+    homeId: homeId,
+  });
+  const handleChange = (e) => {
+    setValue({
+      ...value,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    try {
+      const response = Api.post("/booking/addBooking", {
+        userName: value.userName,
+        phoneNumber: value.phoneNumber,
+        appointment: value.appointment,
+        homeId: value.homeId,
+      });
+      setIsOpen(false);
+
+      Swal.fire({
+        title: "Loading....",
+        text: "Please wait while we process your request.",
+        icon: "info",
+        timer: 1500,
+        timerProgressBar: true,
+        showConfirmButton: false,
+        allowOutsideClick: false,
+      }).then((sucess)=>{
+        if (sucess) {
+          navigate("/purchase");
+        }
+      })
+
+    } catch (error) {
+      Swal.fire("fail !", error.message, "success");
+    }
+  };
 
   useEffect(() => {
     setWidth(carousel.current?.scrollWidth - carousel.current?.offsetWidth);
-    console.log(carousel.current?.scrollWidth - carousel.current?.offsetWidth);
   }, []);
 
   useEffect(() => {
@@ -41,8 +86,6 @@ function Detail() {
       try {
         const response = await axios.get(`${BASE_URL}/home/getOne/${homeId}`);
         setDetail(response.data.data);
-        setAddress(response.data.data.addressId);
-        console.log(response.data.data);
         setImage(response.data.data.image);
       } catch (error) {
         console.log(error);
@@ -50,9 +93,35 @@ function Detail() {
     };
     fetchHome();
   }, [homeId]);
-  console.log(image[0]);
+  console.log(value);
+
+  const customStyles = {
+    overlay: {
+      zIndex: 9999,
+      backgroundColor: "rgba(0, 0, 0, 0.3)",
+    },
+    content: {
+      height: "50%",
+      width: "70%",
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      borderRadius: "10px",
+    },
+  };
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  function openModal() {
+    setIsOpen(true);
+  }
+  function closeModal() {
+    setIsOpen(false);
+  }
   return (
-    <div className="font-Noto h-auto">
+    <div className="font-Noto h-auto relative">
       <Navbar />
       <div className="w-full h-[105px] bg-[#00292F] px-40 flex  py-6 ">
         <div className="relative flex items-center col-span-2 w-11/12 h-[60px]">
@@ -85,15 +154,25 @@ function Detail() {
       </div>
       {/* path */}
       <div className="flex mt-3 px-40 w-full items-center">
-        <Link to={"/"} style={{ textDecoration: "none" }} className="text-lg font-medium text-[#000000]">ໜ້າຫຼັກ</Link>
+        <Link
+          to={"/"}
+          style={{ textDecoration: "none" }}
+          className="text-lg font-medium text-[#000000]"
+        >
+          ໜ້າຫຼັກ
+        </Link>
         <img src={path} alt="path" className="w-2 h-3 mx-3" />
-        <Link to={"/search"} style={{ textDecoration: "none" }} className="text-lg font-medium text-[#000000]">ຄົ້ນຫາ</Link>
+        <Link
+          to={"/search"}
+          style={{ textDecoration: "none" }}
+          className="text-lg font-medium text-[#000000]"
+        >
+          ຄົ້ນຫາ
+        </Link>
         {/* <img src={path} alt="path" className="w-2 h-3 mx-3" />
         <p className="text-lg font-medium text-[#000000]">ເຮືອນເຊົ່າ</p> */}
         <img src={path} alt="path" className="w-2 h-3 mx-3" />
-        <p className="text-lg font-medium text-[#000000]">
-          ເຮືອນ 2 ຊັ້ນໃຫ້ເຊົ່າ ແຄມທາງ ເຂດດົງໂດກ ໃກ້ກັບມະຫາ ວິທະຍາໄລແຫ່ງຊາດ
-        </p>
+        <p className="text-lg font-medium text-[#000000]">{detail.title}</p>
       </div>
 
       {/* Image  */}
@@ -138,9 +217,7 @@ function Detail() {
       <div className="h-[260px] w-full px-40 flex mt-4">
         <div className="w-7/12 h-full border border-[#E0E0E0] rounded-xl shadow-md p-4 flex flex-col justify-between">
           <div>
-            <p className="text-xl  font-semibold ">
-              ເຮືອນ 2 ຊັ້ນໃຫ້ເຊົ່າ ແຄມທາງ ເຂດດົງໂດກ ໃກ້ກັບມະຫາວິທະຍາໄລແຫ່ງຊາດ
-            </p>
+            <p className="text-xl  font-semibold ">{detail.title}</p>
             <div className="flex mt-3 items-center">
               <img
                 src={location}
@@ -241,104 +318,43 @@ function Detail() {
           </div>
         </div>
       </div>
-      {/* other and maping  */}
-      <div className="w-full h-[230px] px-40 flex mt-4">
-        {/* ສິ່ງອຳນວຍຄວາມສະດວກ */}
-        <div className="h-full w-1/3  mr-1 border border-[#E0E0E0] rounded-xl p-4">
-          <p className="text-xl font-semibold">ສິ່ງອຳນວຍຄວາມສະດວກ</p>
-          <div className="flex mt-6">
-            <div>
-              <div className="flex items-center ">
-                <img src={poor} alt="poot" className="w-[25px] h-[17px]" />
-                <p className=" text-base font-normal ml-2">ສະລອຍນ້ຳ</p>
-              </div>
-              <div className="flex  items-center mt-2">
-                <img src={air} alt="poot" className="w-[25px] h-[17px]" />
-                <p className="text-base font-normal ml-2">ແອ 2 ເຄື່ອງ</p>
-              </div>
-              <div className="flex  items-center mt-2">
-                <img src={fish} alt="poot" className="w-[25px] h-[17px]" />
-                <p className="text-base font-normal ml-2">ອ່າງລ້ຽງປາ</p>
-              </div>
-              <div className="flex  items-center mt-2">
-                <img src={fan} alt="poot" className="w-[25px] h-[17px]" />
-                <p className="text-base font-normal ml-2">ພັດລົດຕິດເພດານ</p>
-              </div>
-            </div>
-            <div className="ml-16">
-              <div className="flex  items-center">
-                <img src={poor} alt="poot" className="w-[25px] h-[17px]" />
-                <p className="text-base font-normal  ml-2">ສວນດອກໄມ້</p>
-              </div>
-              <div className="flex  items-center mt-2">
-                <img src={garage} alt="poot" className="w-[25px] h-[17px]" />
-                <p className="text-base font-normal ml-2">ໂຮງຈອດລົດ</p>
-              </div>
-              <div className="flex items-center mt-2">
-                <img src={camera} alt="poot" className="w-[25px] h-[17px]" />
-                <p className="text-base font-normal ml-2">ກ້ອງວົງຈອນປິດ</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="h-full w-2/3  ml-1 flex  border border-[#E0E0E0] rounded-xl">
-          <div className="h-full w-2/5 p-4">
-            <p className="text-xl font-semibold">ທີ່ດິນ</p>
-            <p className="mt-6 text-base font-normal">
-              ເນື້ອທີ່ທັ້ງໝົດ 60 ㎡ ແລະ ຕິດໜ້າທາງ 8 m
-            </p>
-            {/* line */}
-            <div className="w-full mt-4 pr-14">
-              <div className="border border-gray "></div>
-            </div>
-            <div className="flex  items-center mt-4">
-              <img src={car} alt="car" />
-              <p className="ml-2 text-base font-normal">
-                ຂັບລົດຈາກຕົວເມືອງ 15 ນາທີ
-              </p>
-            </div>
-          </div>
-          <div className=" h-full w-3/5 flex justify-center items-center">
-            <p className="text-2xl font-medium">ພື້ນທີ່ສຳຫລັບໂຄສະນາ</p>
-          </div>
-        </div>
-      </div>
+
       {/* table detail price */}
-      <div className="w-full h-[470px] px-40 mt-4">
+      <div className="w-full h-[550px] px-40 mt-4 ">
         <div className="w-full h-full border border-[#E0E0E0] rounded-xl  py-5 px-6 relative ">
           {/* flot package  */}
           <div className="w-full absolute flex pl-[180px]">
             <div className="w-[230px] h-[70px]  flex justify-center items-center border-2 border-[#00B8D1] relative">
               <div className="absolute w-full h-full bg-[#fff] z-10"></div>
               <div className=" flot-box z-0"></div>
-              <p className="text-2xl font-semibold text-[#00B8D1] z-50">
+              <p className="text-2xl font-semibold text-[#00B8D1] z-10">
                 ແພັກເລີ່ມຕົ້ນ
               </p>
             </div>
             <div className="w-[230px] h-[70px] ml-4  flex justify-center items-center border-2 border-[#00B8D1] relative">
               <div className="absolute w-full h-full bg-[#fff] z-10"></div>
               <div className=" flot-box z-0"></div>
-              <p className="text-2xl font-semibold text-[#00B8D1] z-50">
+              <p className="text-2xl font-semibold text-[#00B8D1] z-10">
                 ຈ່າຍກ່ອນ 3 ເດືອນ
               </p>
             </div>
             <div className="w-[230px] h-[70px] ml-4  flex justify-center items-center border-2 border-[#00B8D1] relative">
               <div className="absolute w-full h-full bg-[#fff] z-10"></div>
-              <div className=" flot-box z-0"></div>
-              <p className="text-2xl font-semibold text-[#00B8D1] z-50">
+              <div className=" flot-box "></div>
+              <p className="text-2xl font-semibold text-[#00B8D1] z-10">
                 ຈ່າຍກ່ອນ 6 ເດືອນ
               </p>
             </div>
             <div className="w-[230px] h-[70px] ml-4  flex justify-center items-center border-2 border-[#00B8D1] relative">
               <div className="absolute w-full h-full bg-[#fff] z-10"></div>
               <div className=" flot-box z-0"></div>
-              <p className="text-2xl font-semibold text-[#00B8D1] z-50">
+              <p className="text-2xl font-semibold text-[#00B8D1] z-10">
                 ຈ່າຍກ່ອນ 1 ປີ
               </p>
             </div>
           </div>
           {/* table */}
-          <div className="w-full h-full mt-16">
+          <div className="w-full h-[85%] mt-16 ">
             {/* 1 table */}
             <div className="w-full h-1/6 flex items-center ">
               <div className="w-[180px] h-full items-center flex pl-10 ">
@@ -366,8 +382,35 @@ function Detail() {
               </div>
               <div className="w-[1px] h-full border border-[#E0E0E0]"></div>
             </div>
-            {/* 2 table */}
+            {/* 2 ຄ່າຈອງ table */}
             <div className="w-full h-1/6 bg-[#00B8D1] bg-opacity-[8%] flex items-center">
+              <div className="w-[180px] h-full items-center flex pl-10 ">
+                <p className="text-xl font-semibold">ຄ່າຈອງ</p>
+              </div>
+              <div className="w-[1px] h-full border border-[#E0E0E0]"></div>
+              <div className="w-[180px] h-full items-center flex justify-center pl-10 mr-12">
+                <p className="text-base font-normal">₭ 50,000</p>
+              </div>
+              <div className="w-[1px] h-full border border-[#E0E0E0] mr-2"></div>
+              <div className="w-[1px] h-full border border-[#E0E0E0] ml-2"></div>
+
+              <div className="w-[180px] h-full items-center flex justify-center pl-10 mr-12">
+                <p className="text-base font-normal">₭ 50,000</p>
+              </div>
+              <div className="w-[1px] h-full border border-[#E0E0E0] mr-2"></div>
+              <div className="w-[1px] h-full border border-[#E0E0E0] ml-2"></div>
+              <div className="w-[180px] h-full items-center flex justify-center pl-10 mr-12">
+                <p className="text-base font-normal">₭ 50,000</p>
+              </div>
+              <div className="w-[1px] h-full border border-[#E0E0E0] mr-2"></div>
+              <div className="w-[1px] h-full border border-[#E0E0E0] ml-2"></div>
+              <div className="w-[180px] h-full items-center flex justify-center pl-10 mr-12">
+                <p className="text-base font-normal">₭ 50,000</p>
+              </div>
+              <div className="w-[1px] h-full border border-[#E0E0E0]"></div>
+            </div>
+            {/* 3 table */}
+            <div className="w-full h-1/6 flex items-center ">
               <div className="w-[180px] h-full items-center flex pl-10 ">
                 <p className="text-xl font-semibold">ຄ່າມັດຈຳ</p>
               </div>
@@ -393,8 +436,8 @@ function Detail() {
               </div>
               <div className="w-[1px] h-full border border-[#E0E0E0]"></div>
             </div>
-            {/* 3 table */}
-            <div className="w-full h-1/6 flex items-center">
+            {/* 4 table */}
+            <div className="w-full h-1/6 bg-[#00B8D1] bg-opacity-[8%] flex items-center">
               <div className="w-[180px] h-full items-center flex pl-10 ">
                 <p className="text-xl font-semibold">ຄ່າຂີ້ເຫຍື່ອ</p>
               </div>
@@ -420,8 +463,8 @@ function Detail() {
               </div>
               <div className="w-[1px] h-full border border-[#E0E0E0]"></div>
             </div>
-            {/* 4 table */}
-            <div className="w-full h-1/6 bg-[#00B8D1] bg-opacity-[8%] flex items-center ">
+            {/* 5 table */}
+            <div className="w-full h-1/6 flex items-center ">
               <div className="w-[180px] h-full items-center flex pl-10 ">
                 <p className="text-xl font-semibold">ສ່ວນຫຼຸດ</p>
               </div>
@@ -449,132 +492,117 @@ function Detail() {
             </div>
             {/* button */}
             <div className="w-full h-12 pl-[180px] mt-4 flex">
-              <div className="w-[230px] h-full  bg-logoColor rounded-md flex items-center justify-center">
-                <p className="text-xl font-medium text-[#fff]">ເລືອກຊຳລະ</p>
+              <div
+                className="w-[230px] h-full  bg-logoColor rounded-md flex items-center justify-center hover:cursor-pointer"
+                onClick={openModal}
+              >
+                <p className="text-xl font-medium text-[#fff]">ເລືອກຈອງ</p>
               </div>
-              <div className="w-[230px] h-full  bg-logoColor rounded-md flex items-center justify-center ml-4">
-                <p className="text-xl font-medium text-[#fff]">ເລືອກຊຳລະ</p>
+              <div
+                className="w-[230px] h-full  bg-logoColor rounded-md flex items-center justify-center ml-4 hover:cursor-pointer"
+                onClick={openModal}
+              >
+                <p className="text-xl font-medium text-[#fff]">ເລືອກຈອງ</p>
               </div>
-              <div className="w-[230px] h-full  bg-logoColor rounded-md flex items-center justify-center ml-4">
-                <p className="text-xl font-medium text-[#fff]">ເລືອກຊຳລະ</p>
+              <div
+                className="w-[230px] h-full  bg-logoColor rounded-md flex items-center justify-center ml-4 hover:cursor-pointer"
+                onClick={openModal}
+              >
+                <p className="text-xl font-medium text-[#fff]">ເລືອກຈອງ</p>
               </div>
-              <div className="w-[230px] h-full  bg-logoColor rounded-md flex items-center justify-center ml-4">
-                <p className="text-xl font-medium text-[#fff]">ເລືອກຊຳລະ</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* ລາຍລະອຽດທີ່ພັກ */}
-      <div className="w-full h-[720px] px-40 mt-4">
-        <div className="w-full h-full border border-[#E0E0E0] rounded-xl p-4">
-          <p className="text-xl font-semibold ">ລາຍລະອຽດທີ່ພັກ</p>
-          {/* floor 1 */}
-          <div className="mt-6 w-full h-[185px] flex">
-            <div className="w-[150px] h-full bg-[#00B8D1] rounded-md flex flex-col justify-center items-center">
-              <p className="text-2xl font-bold text-[#fff]">ຊັ້ນ 1</p>
-              <p className="text-[#fff]">ພື້ນທີ່ 25 ㎡</p>
-            </div>
-            <div className="w-1/6 h-full ml-3 border-2 border-[#E0E0E0] rounded-md">
-              <div className="w-full h-3/4 bg-[#00B8D1] rounded-t-md"></div>
-              <div className="w-full h-1/4 flex justify-center items-center ">
-                <p>ຫ້ອງນອນ 8x8 m</p>
-              </div>
-            </div>
-            <div className="w-1/6 h-full ml-3 border-2 border-[#E0E0E0] rounded-md">
-              <div className="w-full h-3/4 bg-[#00B8D1] rounded-t-md"></div>
-              <div className="w-full h-1/4 flex justify-center items-center ">
-                <p>ຫ້ອງນອນ 8x8 m</p>
-              </div>
-            </div>
-            <div className="w-1/6 h-full ml-3 border-2 border-[#E0E0E0] rounded-md">
-              <div className="w-full h-3/4 bg-[#00B8D1] rounded-t-md"></div>
-              <div className="w-full h-1/4 flex justify-center items-center ">
-                <p>ຫ້ອງນອນ 8x8 m</p>
-              </div>
-            </div>
-            <div className="w-1/6 h-full ml-3 border-2 border-[#E0E0E0] rounded-md">
-              <div className="w-full h-3/4 bg-[#00B8D1] rounded-t-md"></div>
-              <div className="w-full h-1/4 flex justify-center items-center ">
-                <p>ຫ້ອງນອນ 8x8 m</p>
-              </div>
-            </div>
-            <div className="w-1/6 h-full ml-3 border-2 border-[#E0E0E0] rounded-md">
-              <div className="w-full h-3/4 bg-[#00B8D1] rounded-t-md"></div>
-              <div className="w-full h-1/4 flex justify-center items-center ">
-                <p>ຫ້ອງນອນ 8x8 m</p>
-              </div>
-            </div>
-          </div>
-          {/* Line */}
-          <div className="w-full my-4 border border-gray"></div>
-          {/* floor 2 */}
-          <div className="w-full h-[185px] flex">
-            <div className="w-[150px] h-full bg-[#00B8D1] rounded-md flex flex-col justify-center items-center">
-              <p className="text-2xl font-bold text-[#fff]">ຊັ້ນ 2</p>
-              <p className="text-[#fff]">ພື້ນທີ່ 20 ㎡</p>
-            </div>
-            <div className="w-1/6 h-full ml-3 border-2 border-[#E0E0E0] rounded-md">
-              <div className="w-full h-3/4 bg-[#00B8D1] rounded-t-md"></div>
-              <div className="w-full h-1/4 flex justify-center items-center ">
-                <p>ຫ້ອງນອນ 8x8 m</p>
-              </div>
-            </div>
-            <div className="w-1/6 h-full ml-3 border-2 border-[#E0E0E0] rounded-md">
-              <div className="w-full h-3/4 bg-[#00B8D1] rounded-t-md"></div>
-              <div className="w-full h-1/4 flex justify-center items-center ">
-                <p>ຫ້ອງນອນ 8x8 m</p>
-              </div>
-            </div>
-            <div className="w-1/6 h-full ml-3 border-2 border-[#E0E0E0] rounded-md">
-              <div className="w-full h-3/4 bg-[#00B8D1] rounded-t-md"></div>
-              <div className="w-full h-1/4 flex justify-center items-center ">
-                <p>ຫ້ອງນອນ 8x8 m</p>
-              </div>
-            </div>
-            <div className="w-1/6 h-full ml-3 border-2 border-[#E0E0E0] rounded-md">
-              <div className="w-full h-3/4 bg-[#00B8D1] rounded-t-md"></div>
-              <div className="w-full h-1/4 flex justify-center items-center ">
-                <p>ຫ້ອງນອນ 8x8 m</p>
-              </div>
-            </div>
-            <div className="w-1/6 h-full ml-3 border-2 border-[#E0E0E0] rounded-md">
-              <div className="w-full h-3/4 bg-[#00B8D1] rounded-t-md"></div>
-              <div className="w-full h-1/4 flex justify-center items-center ">
-                <p>ຫ້ອງນອນ 8x8 m</p>
-              </div>
-            </div>
-          </div>
-          {/* Line */}
-          <div className="w-full my-4 border border-gray"></div>
-          {/* floor 3 */}
-          <div className="w-full h-[185px] flex">
-            <div className="w-[150px] h-full bg-[#00B8D1] rounded-md flex flex-col justify-center items-center">
-              <p className="text-2xl font-bold text-[#fff]">ທີ່ດິນ</p>
-              <p className="text-[#fff]">ພື້ນທີ່ 60 ㎡</p>
-            </div>
-            <div className="w-1/6 h-full ml-3 border-2 border-[#E0E0E0] rounded-md">
-              <div className="w-full h-3/4 bg-[#00B8D1] rounded-t-md"></div>
-              <div className="w-full h-1/4 flex justify-center items-center ">
-                <p>ສະລອຍນ້ຳ 5x5 m</p>
-              </div>
-            </div>
-            <div className="w-1/6 h-full ml-3 border-2 border-[#E0E0E0] rounded-md">
-              <div className="w-full h-3/4 bg-[#00B8D1] rounded-t-md"></div>
-              <div className="w-full h-1/4 flex justify-center items-center ">
-                <p>ສາລາ 5x5 m</p>
-              </div>
-            </div>
-            <div className="w-1/6 h-full ml-3 border-2 border-[#E0E0E0] rounded-md">
-              <div className="w-full h-3/4 bg-[#00B8D1] rounded-t-md"></div>
-              <div className="w-full h-1/4 flex justify-center items-center ">
-                <p>ສວນດອກໄມ້ 5x5 m</p>
+              <div
+                className="w-[230px] h-full  bg-logoColor rounded-md flex items-center justify-center ml-4 hover:cursor-pointer"
+                onClick={openModal}
+              >
+                <p className="text-xl font-medium text-[#fff]">ເລືອກຈອງ</p>
               </div>
             </div>
           </div>
         </div>
       </div>
+
       <Footer />
+      <div className="">
+        <Modal
+          isOpen={modalIsOpen}
+          onRequestClose={closeModal}
+          style={customStyles}
+          contentLabel="Example Modal"
+        >
+          <form className="w-full h-[90%] font-Noto flex flex-col justify-between mt-4">
+            <div className="w-full h-full">
+              <div className="w-full h-12 relative ">
+                <p className="text-[#000000] text-opacity-50">
+                  ຊື່ ແລະ ນາມສະກຸນ <span className="text-[#FF4B55]">*</span>
+                </p>
+                <div className="w-full h-12 mt-2 relative">
+                  <input
+                    onChange={handleChange}
+                    autoComplete="off"
+                    type="text"
+                    name="name_and_surname"
+                    placeholder="ປ້ອນຊື່ ແລະ ນາມສະກຸນ..."
+                    aria-label="Search "
+                    className="w-full h-full pl-4 font-semibold  border border-[#E0E0E0] rounded-md focus:outline-none 
+               "
+                  />
+                </div>
+              </div>
+              <div className="w-full h-12 flex mt-7">
+                <div className="w-1/2 h-full pr-2">
+                  <p className="text-[#000000] text-opacity-50 mt-4">
+                    ເບີໂທລະສັບ <span className="text-[#FF4B55]">*</span>
+                  </p>
+                  <div className="w-full h-12 mt-2 relative">
+                    <input
+                      autoComplete="off"
+                      onChange={handleChange}
+                      type="text"
+                      name="phone"
+                      placeholder="020 92 026 538"
+                      aria-label="Search "
+                      className="w-full h-full pl-4 font-semibold  border border-[#E0E0E0] rounded-md focus:outline-none 
+               "
+                    />
+                  </div>
+                </div>
+                <div className="w-1/2 h-full pl-2">
+                  <p className="text-[#000000] text-opacity-50 mt-4">
+                    ທີ່ຢູ່ <span className="text-[#FF4B55]">*</span>
+                  </p>
+                  <div className="w-full h-12 mt-2 relative">
+                    <input
+                      autoComplete="off"
+                      onChange={handleChange}
+                      type="text"
+                      name="address"
+                      placeholder="Laos"
+                      aria-label="Search "
+                      className="w-full h-full pl-4 font-semibold  border border-[#E0E0E0] rounded-md focus:outline-none 
+               "
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/* button */}
+            <div className="w-full h-12 flex justify-end">
+              <div
+                className="w-[213px] h-full bg-[#00B8D1] rounded-md mr-2 flex justify-center items-center outline  outline-[#00B8D1] text-[#fff] hover:text-[#00B8D1]  hover:bg-opacity-0"
+                onClick={closeModal}
+              >
+                <p className="text-xl font-semibold">ຍົກເລີກ</p>
+              </div>
+              <div
+                onClick={handleSubmit}
+                className="w-[213px] h-full bg-[#00B8D1] rounded-md ml-2 flex justify-center items-center outline outline-[#00B8D1] text-[#fff] hover:text-[#00B8D1]  hover:bg-opacity-0"
+              >
+                <p className="text-xl font-semibold">ຊຳລະເງິນ</p>
+              </div>
+            </div>
+          </form>
+        </Modal>
+      </div>
     </div>
   );
 }

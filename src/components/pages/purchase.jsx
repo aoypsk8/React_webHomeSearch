@@ -1,15 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../Navbar";
 import path from "../../assets/icons/path.png";
 import search from "../../assets/icons/search.png";
 import location from "../../assets/icons/location.png";
 import distance from "../../assets/icons/distance.png";
+import document from "../../assets/icons/document.png";
 import floor from "../../assets/icons/floor.png";
-import person from "../../assets/icons/person.png";
-import mastercard from "../../assets/icons/mastercard.png";
-import card from "../../assets/icons/card.png";
+import qrcode from "../../assets/qrcode.jpeg";
 import Footer from "./Footer";
+import { Link, useParams } from "react-router-dom";
 function Purchase() {
+  const { purchaseId } = useParams();
+  
+  const [selectedFile, setSelectedFile] = useState();
+  const [uploadedImage, setUploadedImage] = useState();
+  const [nameImg, setNameImg] = useState();
+
+  const handleFileChange = (e) => {
+    setSelectedFile(e.target.files[0]);
+    setUploadedImage(URL.createObjectURL(e.target.files[0]));
+    setNameImg(e.target.files[0].name);
+    console.log(e.target.files[0]);
+  };
+
+  const handleClear = () => {
+    setSelectedFile(null);
+    setUploadedImage(null);
+    setNameImg("");
+  };
+
+  useEffect(()=>{
+    window.scrollTo(0, 0);
+  },)
   return (
     <div className="font-Noto h-auto">
       <Navbar />
@@ -44,15 +66,27 @@ function Purchase() {
       </div>
       {/* path */}
       <div className="flex mt-3 px-40 w-full items-center">
-        <p className="text-lg font-semibold">ໜ້າຫຼັກ</p>
-        <img src={path} alt="path" className="w-3 h-4 ml-3" />
-        <p className="text-lg font-semibold ml-3">ເຮືອນ</p>
-        <img src={path} alt="path" className="w-3 h-4 ml-3" />
-        <p className="text-lg font-semibold ml-3">ເຮືອນເຊົ່າ</p>
-        <img src={path} alt="path" className="w-3 h-4 ml-3" />
-        <p className="text-lg font-semibold ml-3">
-          ເຮືອນ 2 ຊັ້ນໃຫ້ເຊົ່າ ແຄມທາງ ເຂດດົງໂດກ ໃກ້ກັບມະຫາ ວິທະຍາໄລແຫ່ງຊາດ
-        </p>
+        <Link
+          to={"/"}
+          style={{ textDecoration: "none" }}
+          className="text-lg font-medium text-[#000000]"
+        >
+          ໜ້າຫຼັກ
+        </Link>
+        <img src={path} alt="path" className="w-2 h-3 mx-3" />
+        <Link
+          to={"/search"}
+          style={{ textDecoration: "none" }}
+          className="text-lg font-medium text-[#000000]"
+        >
+          ຄົ້ນຫາ
+        </Link>
+        {/* <img src={path} alt="path" className="w-2 h-3 mx-3" />
+        <p className="text-lg font-medium text-[#000000]">ເຮືອນເຊົ່າ</p> */}
+        <img src={path} alt="path" className="w-2 h-3 mx-3" />
+        <p className="text-lg font-medium text-[#000000]">detail.title</p>
+        <img src={path} alt="path" className="w-2 h-3 mx-3" />
+        <p className="text-lg font-medium text-[#000000]">detail.title</p>
       </div>
       {/* detail package*/}
       <div className="w-full h-[190px] px-40 mt-3 ">
@@ -107,222 +141,45 @@ function Purchase() {
         </div>
       </div>
       {/* detail ລາຍລະອຽດຜູ້ເຮັດສັນຍາ */}
-      <div className="w-full h-[645px] px-40 mt-4">
-        <div className="w-full h-full p-4 rounded-xl border border-[#E0E0E0]">
-          <div className="flex items-center">
-            <img src={person} alt="person" className="w-6 h-6" />
-            <p className="text-2xl font-bold ml-2">ລາຍລະອຽດຜູ້ເຮັດສັນຍາ</p>
+      <div className="w-full h-[800px] px-40 mt-4">
+        <div className="w-full h-full p-4 rounded-xl border border-[#E0E0E0] flex flex-col  items-center">
+          <div className="w-[300px] h-[480px] bg-logoColor">
+           <img className="w-full h-full"src={qrcode} alt=""/> 
           </div>
-          {/* name and surname  */}
-          <p className="text-[#000000] text-opacity-50">
-            ຊື່ ແລະ ນາມສະກຸນ <span className="text-[#FF4B55]">*</span>
-          </p>
-          <div className="w-full h-12 mt-2 relative">
+          {/* <Link className="w-[300px] h-[50px] outline outline-logoColor mt-10 flex justify-center items-center rounded-xl "> */}
+          {/* <p>Upload your picture here !!</p> */}
+          {/* </Link> */}
+          <form className="w-[300px] h-[50px]  mt-7 flex justify-center  items-center rounded-xl bg-[#c5c5c57b] px-10 hover:cursor-pointer">
             <input
-              // value={searchValue}
-              // onChange={handleSearch}
-              autoComplete="off"
-              type="text"
-              name="search"
-              placeholder="ປ້ອນຊື່ ແລະ ນາມສະກຸນ..."
-              aria-label="Search "
-              className="w-full h-full pl-4 font-semibold  border border-[#E0E0E0] rounded-md focus:outline-none 
-               "
+              id="images"
+              className="hidden"
+              type="file"
+              onChange={handleFileChange}
             />
-            {/* if pass then show this  */}
-            {/* <div className="absolute right-0 top-3 mr-4">123</div> */}
-          </div>
-          {/* email */}
-          <p className="text-[#000000] text-opacity-50 mt-4">
-            <p className="text-[#000000] text-opacity-50">ອີເມລ</p>{" "}
-          </p>
-          <div className="w-full h-12 mt-2 relative">
-            <input
-              // value={searchValue}
-              // onChange={handleSearch}
-              autoComplete="off"
-              type="text"
-              name="search"
-              placeholder="name@example.com"
-              aria-label="Search "
-              className="w-full h-full pl-4 font-semibold  border border-[#E0E0E0] rounded-md focus:outline-none 
-               "
-            />
-            {/* if pass then show this  */}
-            {/* <div className="absolute right-0 top-3 mr-4">123</div> */}
-          </div>
-          {/* phone number and ສັນຊາດ **/}
-          <div className="w-full h-12 flex ">
-            <div className="w-1/2 h-full pr-2">
-              <p className="text-[#000000] text-opacity-50 mt-4">
-                ເບີໂທລະສັບ <span className="text-[#FF4B55]">*</span>
-              </p>
-              <div className="w-full h-12 mt-2 relative">
-                <input
-                  // value={searchValue}
-                  // onChange={handleSearch}
-                  autoComplete="off"
-                  type="text"
-                  name="search"
-                  placeholder="020 92 026 538"
-                  aria-label="Search "
-                  className="w-full h-full pl-4 font-semibold  border border-[#E0E0E0] rounded-md focus:outline-none 
-               "
-                />
-                {/* if pass then show this  */}
-                {/* <div className="absolute right-0 top-3 mr-4">123</div> */}
-              </div>
-            </div>
-            <div className="w-1/2 h-full pl-2">
-              <p className="text-[#000000] text-opacity-50 mt-4">
-                ສັນຊາດ <span className="text-[#FF4B55]">*</span>
-              </p>
-              <div className="w-full h-12 mt-2 relative">
-                <input
-                  // value={searchValue}
-                  // onChange={handleSearch}
-                  autoComplete="off"
-                  type="text"
-                  name="search"
-                  placeholder="Laos"
-                  aria-label="Search "
-                  className="w-full h-full pl-4 font-semibold  border border-[#E0E0E0] rounded-md focus:outline-none 
-               "
-                />
-                {/* if pass then show this  */}
-                {/* <div className="absolute right-0 top-3 mr-4">123</div> */}
-              </div>
-            </div>
-          </div>
+            <label htmlFor="images" className="w-full h-full flex justify-center  items-center"> Upload Image Here !!</label>
 
-          {/* payment ການຊຳລະເງິນ */}
-          <div className="w-full flex items-center mt-20">
-            <img src={card} alt="person" className="w-6 h-5" />
-            <p className="text-2xl font-bold ml-2">ການຊຳລະເງິນ</p>
-          </div>
-          <div className="w-full h-14  mt-6 flex pb-2">
-            <div className="w-1/2 h-full">
-              <form className="">
-                {/* check box */}
-                <div className="flex justify-start items-center">
-                  <input
-                    className="h-4 w-4 "
-                    type="checkbox"
-                    id=""
-                    name=""
-                    value=""
-                  />
-                  <label
-                    for=""
-                    className="text-[#000000] text-opacity-80 ml-2 font-medium"
-                  >
-                    ບັດເຄດິດ<span className="text-[#FF4B55]">*</span>
-                  </label>
-                </div>
-              </form>
-              <div className="w-full h-full relative pr-2 mt-2 border border-[#E0E0E0] rounded-xl flex">
-                <img
-                  src={mastercard}
-                  alt="search"
-                  className="w-11 h-full rounded-xl "
-                />
-                <input
-                  // value={searchValue}
-                  // onChange={handleSearch}
-                  autoComplete="off"
-                  type="text"
-                  name="search"
-                  placeholder="1601 2000 xxxxx xxxxx"
-                  aria-label="Search "
-                  className="w-full h-full pl-1 font-semibold   focus:outline-none 
-               "
-                ></input>
-                {/* if pass then show this  */}
-                {/* <div className="absolute right-0 top-3 mr-4">123</div> */}
-              </div>
-            </div>
-            <div className="w-1/2 h-full flex">
-              <div className="w-1/2 h-full pr-2 pl-2 ">
-                <p className="text-[#000000] text-opacity-50 ">
-                  ວັນໝົດອາຍຸ<span className="text-[#FF4B55]">*</span>
-                </p>
-                <div className="w-full h-full relative mt-2">
-                  <input
-                    // value={searchValue}
-                    // onChange={handleSearch}
-                    autoComplete="off"
-                    type="text"
-                    name="search"
-                    placeholder="MM/YY"
-                    aria-label="Search "
-                    className="w-full h-full pl-4 font-semibold  border border-[#E0E0E0] rounded-md focus:outline-none 
-               "
-                  />
-                  {/* if pass then show this  */}
-                  {/* <div className="absolute right-0 top-3 mr-4">123</div> */}
-                </div>
-              </div>
-              <div className="w-1/2 h-full pl-2">
-                <p className="text-[#000000] text-opacity-50">
-                  ວັນໝົດອາຍຸ<span className="text-[#FF4B55]">*</span>
-                </p>
-                <div className="w-full h-full relative mt-2">
-                  <input
-                    // value={searchValue}
-                    // onChange={handleSearch}
-                    autoComplete="off"
-                    type="text"
-                    name="search"
-                    placeholder="XXX"
-                    aria-label="Search "
-                    className="w-full h-full pl-4 font-semibold  border border-[#E0E0E0] rounded-md focus:outline-none 
-               "
-                  />
-                  {/* if pass then show this  */}
-                  {/* <div className="absolute right-0 top-3 mr-4">123</div> */}
-                </div>
-              </div>
-            </div>
-          </div>
-          <form className="mt-12 w-full ">
-            {/* check box */}
-            <div className="flex justify-start items-center">
-              <input
-                className="h-4 w-4 "
-                type="checkbox"
-                id=""
-                name=""
-                value=""
-              />
-              <label
-                for=""
-                className="text-[#000000] text-opacity-80 ml-2 font-medium"
-              >
-                ຈ່າຍເງິນສົດ
-              </label>
-            </div>
+            {/* <button onClick={handleFileUpload}>Upload</button> */}
           </form>
-          {/* ສັນຍາ */}
-          <form className="w-full  flex justify-end">
-            {/* check box */}
-            <div className="flex justify-start items-center mr-12">
-              <input
-                className="h-4 w-4 "
-                type="checkbox"
-                id=""
-                name=""
-                value=""
-              />
-              <label for="" className="text-xl  ml-2 font-medium">
-                ຂ້ອຍຍອມຮັບຕາມຂໍ້ຕົດລົງຕາມສັນຍາເຊົ່າ
-                <span className="text-[#FF4B55]">*</span>
-              </label>
+          {uploadedImage && (
+            <div className=" w-full h-16 mt-5 px-64 ">
+              <div className=" h-full w-full  flex  items-center border border-[#a7a7a77f] rounded-2xl">
+                <div className="w-[50%] h-full flex items-center justify-start px-5 ">
+                  <img src={document} alt="" className="w-[15%] h-[80%]" />
+                  <div className="">
+                    <p>{nameImg}</p>
+                  </div>
+                </div>
+                <div className="w-[50%] h-full  flex justify-end items-center px-5 ">
+                  <span className="font-black w-10 h-10 flex justify-center items-center hover:cursor-pointer" onClick={handleClear}>
+                    {" "}
+                    X{" "}
+                  </span>
+                </div>
+              </div>
             </div>
-            <p className="text-[#00B8D1] text-xl font-medium">ອ່ານສັນຍາ</p>
-          </form>
-
+          )}
           {/* button */}
-          <div className="w-full h-12  mt-4 flex justify-end">
+          <div className="w-full h-12  mt-8 flex justify-end">
             <div className="w-[213px] h-full bg-[#00B8D1] rounded-md mr-2 flex justify-center items-center outline outline-[#00B8D1] text-[#fff] hover:text-[#00B8D1]  hover:bg-opacity-0">
               <p className="text-xl font-semibold">ຍົກເລີກ</p>
             </div>

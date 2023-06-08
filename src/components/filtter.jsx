@@ -11,8 +11,6 @@ import { BASE_URL } from "./config/globalKey";
 import { useDispatch } from "react-redux";
 import { addSearchHome } from "../slice/searchHomeSlice";
 import { Link } from "react-router-dom";
-import distance from "../assets/icons/distance.png"
-import floor from "../assets/icons/floor.png"
 function Filtter() {
   const dispatch = useDispatch();
 
